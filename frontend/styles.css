@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(90deg, #414141, #2a2a2a);
+    background: linear-gradient(90deg, #363636, #232323);
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -14,7 +14,7 @@ body {
     font-family: "Poppins", sans-serif;
     font-size: 20px;
     color: #d0cfcf;
-    border-radius: 3px;
+    border-radius: 10px;
     z-index: 1;
     transition: 0.3s;
     &:hover {
@@ -26,7 +26,19 @@ body {
     flex-direction: column;
     height: 90vh;
 }
-
+.chat-container p {
+    margin: 4px 10px 4px 10px;
+    font-family: "Poppins", sans-serif;
+    color: #cccccc;
+    font-size: 14px;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+    background-color: #545454;
+    padding: 5px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 10px;
+}
 .chat-messages {
     flex: 1;
     overflow-y: auto;
