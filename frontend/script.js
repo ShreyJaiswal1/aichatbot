@@ -1,5 +1,5 @@
 const apiUrl = 'http://localhost:3000/api/chat';
-document.getElementById('chatInput').addEventListener('input', function() {
+document.getElementById('chatInput').addEventListener('input', async function() {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
 });
@@ -24,7 +24,7 @@ document.getElementById('sendButton').addEventListener('click', async function()
     chatMessage.classList.add('bot-message');
     chatMessage.innerHTML = `<p>${data.reply}</p>`;
     document.getElementById('chatMessages').appendChild(chatMessage);
-
+    scrollToBottom();
     }
 });
 document.getElementById('chatInput').addEventListener("keypress", async (event) => {

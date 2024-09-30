@@ -1,10 +1,11 @@
 body {
-    background: linear-gradient(90deg, #363636, #232323);
+    background: linear-gradient(90deg, #3b3b3b, #3a3939);
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
 }
+
 .navigation {
     background-color: #626161;
     padding: 10px 0;
@@ -21,12 +22,42 @@ body {
         box-shadow: 0 2px 5px rgba(144, 144, 144, 0.515)
     }
 }
+
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: 85vh;
+    width: 500px;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid #bbbaba;
+    margin: 3% auto;
+    background: linear-gradient(90deg, #444444, #1b1b1b);
+    box-shadow: 0 3px 20px 2px rgba(133, 133, 133, 0.492);
+     /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #bdbdbd;
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3d3d3d; 
+  }
 }
-.chat-container p {
+
+.chat-container .footer {
     margin: 4px 10px 4px 10px;
     font-family: "Poppins", sans-serif;
     color: #cccccc;
@@ -39,6 +70,7 @@ body {
     border-radius: 6px;
     font-size: 10px;
 }
+
 .chat-messages {
     flex: 1;
     overflow-y: auto;
@@ -50,6 +82,7 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
+
 .chat-container .chat-messages .bot-message {
     background-color: #757373;
     border-radius: 3px 20px 20px 20px;
@@ -62,6 +95,7 @@ body {
     font-size: 14px;
     word-wrap: break-word;
 }
+
 .chat-container .chat-messages .message {
     background-color: #595757a1;
     border-radius: 20px 3px 20px 20px;
@@ -75,16 +109,21 @@ body {
     font-size: 14px;
     word-wrap: break-word;
 }
+
 #chatInput {
     flex: 1;
     border: 1px solid #b1b1b1;
     padding: 4px;
     border-radius: 5px;
     resize: none;
-    background-color: #b7b5b5;
+    background-color: #d8d7d7;
     overflow: hidden;
-    color: white;
+    color: rgb(0, 0, 0);
     font-family: "Poppins", sans-serif;
+    &:focus {
+        box-shadow: 0 2px 5px #181818;
+        outline-color: rgb(61, 61, 61);
+    }
 }
 
 #sendButton {
@@ -96,6 +135,7 @@ body {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: auto;
     transition: background-color 0.3s;
 }
 
