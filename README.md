@@ -24,6 +24,6 @@ node server.js
 ```
 5. Open the html and Enjoy
 # Example
-<img src="https://github.com/ShreyJaiswal1/aichatbot/blob/main/frontend/assets/image.png?raw=true" height="400px" width="300px"><br>
+<img src="https://github.com/ShreyJaiswal1/aichatbot/blob/main/frontend/assets/image.png?raw=true" height="500px" width="300px"><br>
 
 Further features will be upcoming soon...
