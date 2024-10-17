@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/chat';
+const apiUrl = 'https://aibot-sclrtlfg.b4a.run/api/chat';
 const socket = io(apiUrl, {
   reconnection: true,             // whether to reconnect automatically
   reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
