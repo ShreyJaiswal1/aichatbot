@@ -11,7 +11,7 @@ let joined = false
    document.getElementById("name").focus();
 
     // username entered
-    document.getElementById('name').addEventListener("keypress", async (event) => {
+    document.getElementById('name').addEventListener("keydown", async (event) => {
       if (event.key === 'Enter') {
         event.preventDefault();
         goToChatRoom();
@@ -61,7 +61,7 @@ document.getElementById('sendButton').addEventListener('click', async function()
     }
 });
 
-document.getElementById('chatInput').addEventListener("keypress", async (event) => {
+document.getElementById('chatInput').addEventListener("keydown", async (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       document.getElementById('sendButton').click();
