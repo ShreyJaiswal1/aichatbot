@@ -30,6 +30,8 @@ function goToChatRoom() {
           joined = true
           socket.emit('user-joined', username)
       }
+  } else {
+    alert("Please provide a username")
   }
 }
 document.getElementById('chatInput').addEventListener('input', async function() {
