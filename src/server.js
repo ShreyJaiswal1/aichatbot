@@ -22,8 +22,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 const conversationHistory = {};
 // Handle API requests
-app.get("/", async (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+app.get("/*", async (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
 })
 app.post('/api/chat', async (req, res) => {
     const userMsg = req.body.message
