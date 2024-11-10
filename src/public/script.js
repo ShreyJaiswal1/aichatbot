@@ -1,4 +1,4 @@
-const apiUrl = 'https://localhost:3000/api/chat';
+const apiUrl = 'https://honey.lazyshrey.xyz/api/chat';
 const socket = io(apiUrl, {
   reconnection: true,             // whether to reconnect automatically
   reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
