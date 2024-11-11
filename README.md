@@ -8,7 +8,7 @@ This chatbot uses meta llama 3  model.
 # Steps to localhost
 1. Go to the backend folder
 ```
-cd backend
+cd aichatbot/src
 ```
 2. Create a new .env file and add groq token
 ```

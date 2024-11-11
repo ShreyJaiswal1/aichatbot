@@ -1,229 +1,218 @@
 body {
-    background: linear-gradient(90deg, #3b3b3b, #3a3939);
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
+  background: linear-gradient(90deg, #3b3b3b, #3a3939);
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
 }
 .bttn {
-    cursor: pointer;
-    border: none;
-    color: white;
-    padding-left: 0.8em;
-    float: left;
+  cursor: pointer;
+  border: none;
+  color: white;
+  padding-left: 0.8em;
+  float: left;
 }
 .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
 
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidenav a:hover {
-    color: #707070;
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  
-  #main {
-    transition: margin-left .5s;
-    padding: 16px;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #707070;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 .navigation {
-    background-color: #626161;
-    padding: 0.5em 0;
-    position: sticky;
-    width: 95%;
-    margin: auto;
-    margin-top: 0.5em;
-    box-shadow: 0 2px 5px rgba(73, 73, 73, 0.492);
-    text-align: center;
-    font-family: "Poppins", sans-serif;
-    font-size: 1.5em;
-    color: #d0cfcf;
-    border-radius: 0.5em;
-    z-index: 0;
-    transition: 0.3s;
-    &:hover {
-        box-shadow: 0 2px 5px rgb(45, 45, 45)
-    }
+  background-color: #626161;
+  padding: 0.5em 0;
+  position: sticky;
+  width: 95%;
+  margin: auto;
+  margin-top: 0.5em;
+  box-shadow: 0 2px 5px rgba(73, 73, 73, 0.492);
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5em;
+  color: #d0cfcf;
+  border-radius: 0.5em;
+  z-index: 0;
+  transition: 0.3s;
+  &:hover {
+      box-shadow: 0 2px 5px rgb(45, 45, 45)
+  }
 }
 
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 77vh;
-    width: 73%;
-    display: flex;
-    border-radius: 10px;
-    border: 1px solid #bbbaba;
-    margin: 3% auto;
-    background: linear-gradient(90deg, #444444, #1b1b1b);
-    box-shadow: 0 3px 20px 2px rgba(133, 133, 133, 0.492);
-     /* width */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #bdbdbd;
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #3d3d3d; 
-  }
+  display: flex;
+  flex-direction: column;
+  height: 77vh;
+  width: 73%;
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid #bbbaba;
+  margin: 3% auto;
+  background: linear-gradient(90deg, #444444, #282828);
+  box-shadow: 0 3px 20px 2px rgba(133, 133, 133, 0.492);
+   /* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #bdbdbd;
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3d3d3d; 
+}
 }
 
 .chat-container .footer {
-    margin: 4px 10px 4px 10px;
-    font-family: "Poppins", sans-serif;
-    color: #cccccc;
-    font-size: 14px;
-    word-wrap: break-word;
-    margin-bottom: 10px;
-    background-color: #545454;
-    padding: 5px;
-    text-align: center;
-    border-radius: 6px;
-    font-size: 10px;
+  margin: 4px 10px 4px 10px;
+  font-family: "Poppins", sans-serif;
+  color: #cccccc;
+  font-size: 14px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  background-color: #545454;
+  padding: 5px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 10px;
 }
 
 .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
 }
 
 .input-area {
-    display: flex;
-    padding: 10px;
-    border-radius: 5px;
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
 }
 
+.loader {
+width: 30px;
+aspect-ratio: 2;
+--_g: no-repeat radial-gradient(circle closest-side,#363636 90%,#00000000);
+background: 
+  var(--_g) 0%   50%,
+  var(--_g) 50%  50%,
+  var(--_g) 100% 50%;
+background-size: calc(100%/3) 50%;
+animation: l3 1s infinite linear;
+}
+
+@keyframes l3 {
+  20%{background-position:0%   0%, 50%  50%,100%  50%}
+  40%{background-position:0% 100%, 50%   0%,100%  50%}
+  60%{background-position:0%  50%, 50% 100%,100%   0%}
+  80%{background-position:0%  50%, 50%  50%,100% 100%}
+}
+.chat-container .chat-messages .bot-message .loader {
+background-color: #757373;
+border-radius: 3px 20px 20px 20px;
+padding: 10px;
+max-width: 60%;
+width: fit-content;
+margin-bottom: 10px;
+display: block;
+align-items: center; 
+height: 40px;
+}
 .chat-container .chat-messages .bot-message p {
-  background-color: #757373;
-  border-radius: 3px 20px 20px 20px;
-  padding: 10px;
-  max-width: 60%;
-  width: fit-content;
-  margin-bottom: 10px;
-  font-family: "Poppins", sans-serif;
-  color: white;
-  font-size: 14px;
-  word-wrap: break-word;
+background-color: #757373;
+border-radius: 3px 20px 20px 20px;
+padding: 10px;
+max-width: 60%;
+width: fit-content;
+margin-bottom: 10px;
+font-family: "Poppins", sans-serif;
+color: white;
+font-size: 14px;
+word-wrap: break-word;
 }
 
 .chat-container .chat-messages .message p {
-  background-color: #595757a1;
-  border-radius: 20px 3px 20px 20px;
-  padding: 10px;
-  margin-left: auto;
-  max-width: 60%; 
-  width: fit-content;
-  margin-bottom: 10px;
-  font-family: "Poppins", sans-serif;
-  color: white;
-  font-size: 14px;
-  word-wrap: break-word;
+background-color: #595757a1;
+border-radius: 20px 3px 20px 20px;
+padding: 10px;
+margin-left: auto;
+max-width: 60%; 
+width: fit-content;
+margin-bottom: 10px;
+font-family: "Poppins", sans-serif;
+color: white;
+font-size: 14px;
+word-wrap: break-word;
 }
 
 #chatInput {
-    flex: 1;
-    border: 1px solid #b1b1b1;
-    padding: 4px;
-    border-radius: 5px;
-    resize: none;
-    background-color: #d8d7d7;
-    overflow: hidden;
-    color: rgb(0, 0, 0);
-    font-family: "Poppins", sans-serif;
-    &:focus {
-        box-shadow: 0 2px 5px #181818;
-        outline-color: rgb(61, 61, 61);
-    }
+  flex: 1;
+  border: 1px solid #b1b1b1;
+  padding: 4px;
+  border-radius: 10px;
+  resize: none;
+  background-color: #c4c4c4;
+  overflow: hidden;
+  color: rgb(0, 0, 0);
+  font-family: "Poppins", sans-serif;
+  &:focus {
+      box-shadow: 0 2px 5px #3d3d3d;
+      outline-color: rgb(61, 61, 61);
+  }
 }
 
 #sendButton {
-    margin-left: 10px;
-    font-family: "Poppins", sans-serif;
-    padding: 10px 20px;
-    border: none;
-    background-color: #595757a1;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: auto;
-    transition: background-color 0.3s;
-}
-
-#sendButton:hover {
-    background-color: #515355ed;
-}
-.landing {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(184, 184, 184, 0.933);
-  text-align: center;
-  display: table;
-  margin: auto;
-  padding: auto;
-  border-radius: 0.8em;
-  z-index: 1;
-}
-
-.landing .landing-container {
-  display: table-cell;
-  vertical-align: middle;
-  transform: translateY(-50px);
-}
-
-.landing .landing-title {
-  color: rgb(0, 0, 0);
-  font-size: 2.4rem;
-  font-weight: 300;
-}
-.landing .landing-container button {
   margin-left: 10px;
   font-family: "Poppins", sans-serif;
-  padding: 0.5em 0.5em;
+  padding: 10px 20px;
   border: none;
-  background-color: #2f2f2fa1;
+  background-color: #595757a1;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -231,32 +220,72 @@ body {
   transition: background-color 0.3s;
 }
 
+#sendButton:hover {
+  background-color: #515355ed;
+}
+.landing {
+position: fixed;
+width: 100%;
+height: 100%;
+background: rgba(184, 184, 184, 0.933);
+text-align: center;
+display: table;
+margin: auto;
+padding: auto;
+border-radius: 0.8em;
+z-index: 1;
+}
+
+.landing .landing-container {
+display: table-cell;
+vertical-align: middle;
+transform: translateY(-50px);
+}
+
+.landing .landing-title {
+color: rgb(0, 0, 0);
+font-size: 2.4rem;
+font-weight: 300;
+}
+.landing .landing-container button {
+margin-left: 10px;
+font-family: "Poppins", sans-serif;
+padding: 0.5em 0.5em;
+border: none;
+background-color: #2f2f2fa1;
+color: white;
+border-radius: 5px;
+cursor: pointer;
+margin-top: auto;
+transition: background-color 0.3s;
+}
+
 #name {
-  border: 0;
-  border-bottom: 2px solid rgb(0, 0, 0);
-  outline: 0;
-  margin-top: 2rem;
-  background: none;
-  caret-color: rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-  padding-bottom: .9rem;
-  font-family: inherit;
-  font-size: 2rem;
-  font-weight: 300;
-  text-align: center;
-  width: 500px;
-  border-radius: 0;
+border: 0;
+border-bottom: 2px solid rgb(0, 0, 0);
+outline: 0;
+margin-top: 2rem;
+background: none;
+caret-color: rgb(0, 0, 0);
+color: rgb(0, 0, 0);
+padding-bottom: .9rem;
+font-family: inherit;
+font-size: 2rem;
+font-weight: 300;
+text-align: center;
+width: 500px;
+border-radius: 0;
 }
 
 @media screen and (max-width: 600px) {
-  .landing-title {
-      font-size: 1.6rem;
-      padding: 0 1rem
-  }
+.landing-title {
+    font-size: 1.6rem;
+    padding: 0 1rem
+}
 
-  #name {
-      font-size: 1.4rem;
-      width: 70vw;
-      min-width: 200px;
-  }
+#name {
+    font-size: 1.4rem;
+    width: 70vw;
+    min-width: 200px;
+}
 }
