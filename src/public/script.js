@@ -1,5 +1,5 @@
-const apiUrl = 'http://localhost:3000/api/chat';
-const socket = io(apiUrl, {
+const webUrl = "http://localhost:3000";
+const socket = io(webUrl, {
   reconnection: true, // whether to reconnect automatically
   reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
   reconnectionDelay: 1000, // how long to initially wait before attempting a new reconnection
@@ -11,12 +11,14 @@ let joined = false;
 // document.getElementById("name").focus();
 
 // username entered
+
 document.getElementById('name').addEventListener('keydown', async (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
     goToChatRoom();
   }
 });
+
 function goToChatRoom() {
   const inputValue = document.getElementById('name');
 
@@ -38,8 +40,13 @@ document.getElementById('chatInput').addEventListener('input', async function ()
     this.style.height = 'auto';
     this.style.height = this.scrollHeight + 'px';
   });
-document.getElementById('sendButton').addEventListener('click', async function () {
-    // get the value of the charbox input
+  let isSending = false;
+  document.getElementById('sendButton').addEventListener('click', async function () {
+  if (isSending) return;  // If already sending, prevent further clicks
+
+  isSending = true
+
+    // get the value of the chatbox input
     const message = document.getElementById('chatInput').value;
     if (message.trim() !== '') {
       const chatElement = document.createElement('div');
@@ -58,7 +65,7 @@ document.getElementById('sendButton').addEventListener('click', async function (
       document.getElementById('chatMessages').appendChild(chatMessage);
   
       //fetching msg
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${webUrl}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: message, username: username })
@@ -68,12 +75,9 @@ document.getElementById('sendButton').addEventListener('click', async function (
       }
       const data = await response.json();
       chatMessage.innerHTML = `<p>${data.reply}</p>`;
-      // const chatMessage = document.createElement('div');
-      // chatMessage.classList.add('bot-message');
-      // chatMessage.innerHTML = `<p>${data.reply}</p>`;
-      // document.getElementById('chatMessages').appendChild(chatMessage);
       scrollToBottom();
     }
+    isSending = false; 
   });
 document.getElementById('chatInput').addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') {
@@ -95,3 +99,18 @@ function closeNav() {
   document.getElementById('mySidenav').style.width = '0';
   document.body.style.backgroundColor = 'white';
 }
+
+// toggle the dark and light mode when the user clicks the button
+const toggleButton = document.getElementById("check-5");
+const themeStylesheet = document.getElementById("theme-stylesheet");
+
+toggleButton.addEventListener("click", () => {
+    // Check current theme
+    if (themeStylesheet.getAttribute("href") === "light.css") {
+        // Switch to dark mode
+        themeStylesheet.setAttribute("href", "dark.css");
+    } else {
+        // Switch to light mode
+        themeStylesheet.setAttribute("href", "light.css");
+    }
+});
