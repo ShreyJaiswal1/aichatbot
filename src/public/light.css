@@ -300,6 +300,8 @@ word-wrap: break-word;
   overflow: hidden;
   color: rgb(0, 0, 0);
   transition: 0.3s;
+  overflow-y: auto;
+  max-height: 100px;
   font-family: "Poppins", sans-serif;
   &:focus {
       box-shadow: 0 2px 5px #656565;
@@ -309,23 +311,37 @@ word-wrap: break-word;
     color: #454444;
   }
 }
+#chatInput::-webkit-scrollbar {
+  width: 8px;
+}
 
+#chatInput::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+#chatInput::-webkit-scrollbar-thumb:hover {
+  background: #3d3d3d;
+}
 #sendButton {
   margin-left: 10px;
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
   border: none;
-  background-color: #aeaeaeb0;
+  background: linear-gradient(45deg,#e2a4e6b0,#91aaeaed);
   color: white;
   border-radius: 20px;
   cursor: pointer;
   margin-bottom: 4px;
   margin-top: auto;
-  transition: background-color 0.3s;
+  transition: background-color 0.7s;
 }
 
 #sendButton:hover {
-  background-color: #8f9091ed;
+  background-color: #91aaeaed;
+}
+#sendButton:active {
+  transform: translateY(2px);
 }
 .landing {
 position: fixed;

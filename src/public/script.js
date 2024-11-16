@@ -1,4 +1,4 @@
-const webUrl = "http://localhost:3000";
+const webUrl = "http://localhost:3050";
 const socket = io(webUrl, {
   reconnection: true, // whether to reconnect automatically
   reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
@@ -36,12 +36,17 @@ function goToChatRoom() {
     alert('Please provide a username');
   }
 }
+// dynamically change the input area
 document.getElementById('chatInput').addEventListener('input', async function () {
-    this.style.height = 'auto';
-    this.style.height = this.scrollHeight + 'px';
-  });
+  this.style.height = 'auto';
+  const maxHeight = 100;
+  this.style.height = Math.min(this.scrollHeight, maxHeight) + 'px';
+});
+
   let isSending = false;
   document.getElementById('sendButton').addEventListener('click', async function () {
+    const chatInput = document.getElementById('chatInput');
+    chatInput.style.height = 'auto'; 
   if (isSending) return;  // If already sending, prevent further clicks
 
   isSending = true
