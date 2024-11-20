@@ -1,4 +1,4 @@
-const webUrl = "http://localhost:3050";
+const webUrl = 'http://localhost:3000';
 const socket = io(webUrl, {
   reconnection: true, // whether to reconnect automatically
   reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
@@ -6,56 +6,51 @@ const socket = io(webUrl, {
   reconnectionDelayMax: 5000,
 });
 let username = null;
-let joined = false;
-// autofocus on input username
-// document.getElementById("name").focus();
 
-// username entered
-
-document.getElementById('name').addEventListener('keydown', async (event) => {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    goToChatRoom();
-  }
-});
-
-function goToChatRoom() {
-  const inputValue = document.getElementById('name');
-
-  if (inputValue.value.length != 0) {
-    username = inputValue.value;
-    inputValue.blur;
-    inputValue.value = '';
-    document.getElementById('landing-page').remove();
-
-    if (!joined) {
-      joined = true;
+// Fetch username when page loads
+window.addEventListener('load', async () => {
+  try {
+    const response = await fetch(`${webUrl}/user`);
+    const data = await response.json();
+    if (data.name) {
+      username = data.name;
       socket.emit('user-joined', username);
+      // Add welcome message
+      const welcomeMsg = document.createElement('div');
+      welcomeMsg.classList.add('bot-message');
+      welcomeMsg.innerHTML = `<p>Welcome ${username}! kese ho aaj tum?</p>`;
+      document.getElementById('chatMessages').appendChild(welcomeMsg);
     }
-  } else {
-    alert('Please provide a username');
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    window.location.href = '/';
   }
-}
-// dynamically change the input area
-document.getElementById('chatInput').addEventListener('input', async function () {
-  this.style.height = 'auto';
-  const maxHeight = 100;
-  this.style.height = Math.min(this.scrollHeight, maxHeight) + 'px';
 });
 
-  let isSending = false;
-  document.getElementById('sendButton').addEventListener('click', async function () {
-    const chatInput = document.getElementById('chatInput');
-    chatInput.style.height = 'auto'; 
-  if (isSending) return;  // If already sending, prevent further clicks
+// dynamically change the input area
+document
+  .getElementById('chatInput')
+  .addEventListener('input', async function () {
+    this.style.height = 'auto';
+    const maxHeight = 100;
+    this.style.height = Math.min(this.scrollHeight, maxHeight) + 'px';
+  });
 
-  isSending = true
+let isSending = false;
+document
+  .getElementById('sendButton')
+  .addEventListener('click', async function () {
+    const chatInput = document.getElementById('chatInput');
+    chatInput.style.height = 'auto';
+    if (isSending) return; // If already sending, prevent further clicks
+
+    isSending = true;
 
     // get the value of the chatbox input
     const message = document.getElementById('chatInput').value;
     if (message.trim() !== '') {
       const chatElement = document.createElement('div');
-      chatElement.classList.add('message'); 
+      chatElement.classList.add('message');
       chatElement.innerHTML = `<p>${message}</p>`;
       document.getElementById('chatMessages').appendChild(chatElement);
       document.getElementById('chatInput').value = '';
@@ -68,12 +63,12 @@ document.getElementById('chatInput').addEventListener('input', async function ()
       chatMessage.appendChild(loader);
 
       document.getElementById('chatMessages').appendChild(chatMessage);
-  
+
       //fetching msg
       const response = await fetch(`${webUrl}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message, username: username })
+        body: JSON.stringify({ message: message, username: username }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -82,9 +77,11 @@ document.getElementById('chatInput').addEventListener('input', async function ()
       chatMessage.innerHTML = `<p>${data.reply}</p>`;
       scrollToBottom();
     }
-    isSending = false; 
+    isSending = false;
   });
-document.getElementById('chatInput').addEventListener('keydown', async (event) => {
+document
+  .getElementById('chatInput')
+  .addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       document.getElementById('sendButton').click();
@@ -106,16 +103,33 @@ function closeNav() {
 }
 
 // toggle the dark and light mode when the user clicks the button
-const toggleButton = document.getElementById("check-5");
-const themeStylesheet = document.getElementById("theme-stylesheet");
+const toggleButton = document.getElementById('check-5');
+const themeStylesheet = document.getElementById('theme-stylesheet');
 
-toggleButton.addEventListener("click", () => {
-    // Check current theme
-    if (themeStylesheet.getAttribute("href") === "light.css") {
-        // Switch to dark mode
-        themeStylesheet.setAttribute("href", "dark.css");
-    } else {
-        // Switch to light mode
-        themeStylesheet.setAttribute("href", "light.css");
-    }
+toggleButton.addEventListener('click', () => {
+  // Check current theme
+  if (themeStylesheet.getAttribute('href') === 'light.css') {
+    // Switch to dark mode
+    themeStylesheet.setAttribute('href', 'dark.css');
+  } else {
+    // Switch to light mode
+    themeStylesheet.setAttribute('href', 'light.css');
+  }
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const logoutButton = document.getElementById('logOutBttn');
+  if (logoutButton) {
+      logoutButton.addEventListener('click', async () => {
+          try {
+              const response = await fetch('/logout');
+              if (response.ok) {
+                  window.location.href = '/';
+              } else {
+                  console.error('Logout failed');
+              }
+          } catch (error) {
+              console.error('Error logging out:', error);
+          }
+      });
+  }
 });

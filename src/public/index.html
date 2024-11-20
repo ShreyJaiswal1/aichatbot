@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <meta property="og:url" content="https://honey.lazyshrey.xyz" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Honey AI Chatbot offers a fun and interactive way to chat in Hinglish, providing a unique AI-powered companion experience." />
+    <meta name="keywords" content="Honey AI, AI Chatbot, Hinglish chatbot, AI companion, conversational AI" />
+    <meta name="author" content="Shrey Jaiswal" />
+    
+    <!-- Open Graph Metadata -->
     <meta property="og:title" content="Honey AI Chatbot" />
-    <meta property="og:color" content="#ffbe6b" />
+    <meta property="og:description" content="Meet Honey AI, your friendly Hinglish-speaking chatbot and perfect companion! Enjoy seamless, fun, and engaging conversations that brighten your day and make every chat memorable." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://github.com/ShreyJaiswal1" />
-    <meta property="og:image" content="./assets/logo.png" />
-    <meta
-      property="og:description"
-      content="Honey chatbot can talk in hinglish and become your companion!"
-    />
+    <meta property="og:image" content="./assets/honeyai.jpg" />
     <meta property="og:site_name" content="Honey AI" />
+    <meta property="og:locale" content="en_US" />
+
     <title>AI Chatbot</title>
     <link id="theme-stylesheet" rel="stylesheet" href="light.css" />
     <link
@@ -27,20 +31,6 @@
     />
   </head>
   <body>
-    <div id="landing-page" class="landing">
-      <div class="landing-container">
-        <p class="landing-title">Please enter your name.</p>
-        <input id="name" type="text" autocomplete="off" autofocus />
-        <button id="namebutton" onclick="goToChatRoom()">
-          <img
-            width="30"
-            height="30"
-            src="https://img.icons8.com/ios-glyphs/30/FFFFFF/filled-sent.png"
-            alt="filled-sent"
-          />
-        </button>
-      </div>
-    </div>
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
         >&times;</a
@@ -49,14 +39,25 @@
       <a href="https://github.com/ShreyJaiswal1">Github</a>
       <a href="https://discord.com/users/694480378769178645">Discord</a><br />
       <center>
-        <h4 style="color: grey">Dark Mode</h4>
+        <h4 style="color: grey">Light Mode</h4>
         <div class="checkbox-wrapper-5">
           <div class="check">
             <input checked="" id="check-5" type="checkbox" />
             <label for="check-5"></label>
           </div>
         </div>
-      </center>
+      <button class="Btn" id="logOutBttn">
+        <div class="sign">
+          <svg viewBox="0 0 512 512">
+            <path
+              d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="text">Logout</div>
+      </button>
+    </center>
     </div>
     <div class="navigation">
       <span class="bttn" onclick="openNav()">&#9776;</span>
@@ -65,9 +66,7 @@
     <div class="chat-container">
       <div class="chat-messages" id="chatMessages">
         <!-- chat messages will be displayed here -->
-        <div class="bot-message">
-          <p>Hey! I am honey, kese ho aaj aap?</p>
-        </div>
+        <!-- Welcome message will be added by JavaScript -->
       </div>
       <div class="input-area">
         <textarea id="chatInput" placeholder="Type a message..."></textarea>
