@@ -10,7 +10,7 @@ async function getAIResponse(userMessage, userName, chatHistory) {
           Authorization: `Bearer ${apiToken}`,
         },
         body: JSON.stringify({
-          model: 'llama-3.1-70b-versatile',
+          model: 'llama-3.2-90b-text-preview',
           messages: [
             {
               role: 'system',
@@ -37,9 +37,9 @@ async function getAIResponse(userMessage, userName, chatHistory) {
       });
       const data = await response.json();
       const groqResponse = data.choices[0].message.content
-      console.log(`--------------------------------------------\n`.green);
+      console.log(`------------------------------------------------------------\n`.green);
       console.log(`${userName}`.red +`: ${userMessage}\nAi response: ${groqResponse}\n`.cyan)
-      console.log(`--------------------------------------------`.green)
+      console.log(`------------------------------------------------------------`.green)
       return groqResponse;
     } catch (error) {
       console.error('Error fetching AI response:', error);

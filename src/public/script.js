@@ -55,12 +55,17 @@ document
       document.getElementById('chatMessages').appendChild(chatElement);
       document.getElementById('chatInput').value = '';
       scrollToBottom();
+
       // loading the chat
       const chatMessage = document.createElement('div');
       chatMessage.classList.add('bot-message');
       const loader = document.createElement('div');
-      loader.classList.add('loader');
-      chatMessage.appendChild(loader);
+      // loader.classList.add('loader');
+      // chatMessage.appendChild(loader);
+
+      loader.classList.add('typing')
+      loader.textContent = 'Typing...';
+      chatMessages.appendChild(loader);
 
       document.getElementById('chatMessages').appendChild(chatMessage);
 
@@ -73,6 +78,7 @@ document
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      loader.remove()
       const data = await response.json();
       chatMessage.innerHTML = `<p>${data.reply}</p>`;
       scrollToBottom();
@@ -121,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (logoutButton) {
       logoutButton.addEventListener('click', async () => {
           try {
-              const response = await fetch('/logout');
+              const response = await fetch(`${webUrl}/logout`);
               if (response.ok) {
                   window.location.href = '/';
               } else {

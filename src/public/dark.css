@@ -262,6 +262,11 @@ display: block;
 align-items: center; 
 height: 40px;
 }
+.typing {
+    color: #868686;
+    font-style: italic;
+    opacity: 0.8;
+}
 .chat-container .chat-messages .bot-message p {
 background-color: #757373;
 border-radius: 3px 20px 20px 20px;
@@ -273,6 +278,7 @@ font-family: "Poppins", sans-serif;
 color: white;
 font-size: 14px;
 word-wrap: break-word;
+animation: SoftSend 0.4s ease-in-out;
 }
 
 .chat-container .chat-messages .message p {
@@ -287,6 +293,11 @@ font-family: "Poppins", sans-serif;
 color: white;
 font-size: 14px;
 word-wrap: break-word;
+animation: SoftSend 0.4s ease-in-out;
+}
+@keyframes SoftSend {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 #chatInput {

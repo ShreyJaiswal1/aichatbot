@@ -96,7 +96,10 @@ app.get(
     res.redirect('/chat');
   }
 );
+
+var userID = null;
 app.get('/user', (req, res) => {
+  userID = req.user.id;
   if (req.user) {
       res.json({ 
           name: req.user.displayName,
@@ -125,8 +128,8 @@ app.get('/logout', (req, res, next) => {
 var userName = '';
 app.post('/api/chat', async (req, res) => {
   const userMsg = req.body.message;
-  userName = req.body.username;
-
+  userName = `${req.body.username}-${userID}`;
+  console.log(userName);
   // Initialize conversation history for the user if it doesn't exist
   if (!conversationHistory[userName]) {
     conversationHistory[userName] = [];
@@ -138,7 +141,7 @@ app.post('/api/chat', async (req, res) => {
   try {
     const botResponse = await getAIResponse(
       userMsg,
-      userName,
+      req.body.username,
       conversationHistory[userName]
     );
 
