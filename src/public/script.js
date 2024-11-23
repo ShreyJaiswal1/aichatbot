@@ -37,54 +37,78 @@ document
   });
 
 let isSending = false;
-document
-  .getElementById('sendButton')
-  .addEventListener('click', async function () {
-    const chatInput = document.getElementById('chatInput');
-    chatInput.style.height = 'auto';
-    if (isSending) return; // If already sending, prevent further clicks
 
-    isSending = true;
+// fetch the response from the server
+document.getElementById('sendButton').addEventListener('click', async function () {
+  const chatInput = document.getElementById('chatInput');
+  chatInput.style.height = 'auto';
+  if (isSending) return; // If already sending, prevent further clicks
 
-    // get the value of the chatbox input
-    const message = document.getElementById('chatInput').value;
-    if (message.trim() !== '') {
+  isSending = true;
+
+  // Get the value of the chatbox input
+  const message = chatInput.value;
+  if (message.trim() !== '') {
       const chatElement = document.createElement('div');
       chatElement.classList.add('message');
       chatElement.innerHTML = `<p>${message}</p>`;
       document.getElementById('chatMessages').appendChild(chatElement);
-      document.getElementById('chatInput').value = '';
+      chatInput.value = '';
       scrollToBottom();
 
-      // loading the chat
+      // Loading the chat
       const chatMessage = document.createElement('div');
       chatMessage.classList.add('bot-message');
-      const loader = document.createElement('div');
-      // loader.classList.add('loader');
-      // chatMessage.appendChild(loader);
-
-      loader.classList.add('typing')
-      loader.textContent = 'Typing...';
-      chatMessages.appendChild(loader);
-
       document.getElementById('chatMessages').appendChild(chatMessage);
+      const loader = document.createElement('div');
+      // Check if the message starts with /imagine
+      if (message.startsWith('/imagine')) {
+        loader.classList.add('typing');
+        loader.textContent = 'Generating Image...';
+        chatMessage.appendChild(loader);
+          const prompt = message.substring(9).trim(); // Get the prompt without the prefix
+          const response = await fetch(`${webUrl}/api/imagine`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ prompt: prompt, username: username }),
+          });
 
-      //fetching msg
-      const response = await fetch(`${webUrl}/api/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message, username: username }),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+          if (!response.ok) {
+              chatMessage.innerHTML = `<p>Cannot Fetch image</p>`;
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const imageUrl = data.url; // Assuming the response contains the image URL in 'url'
+          chatMessage.innerHTML = `<img src="${imageUrl}" alt="Generated Image" style="max-width: 40%; min-width: 200px; height: auto; border-radius: 5px;">`;
+          scrollToBottom();
+      } else {
+        loader.classList.add('typing');
+        loader.textContent = 'Typing...';
+        chatMessage.appendChild(loader);
+          // Fetching regular chat response
+          const response = await fetch(`${webUrl}/api/chat`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: message, username: username }),
+          });
+
+          if (!response.ok) {
+              chatMessage.innerHTML = `<p>Cannot Fetch message</p>`;
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          chatMessage.innerHTML = `<p>${data.reply}</p>`;
       }
-      loader.remove()
-      const data = await response.json();
-      chatMessage.innerHTML = `<p>${data.reply}</p>`;
+
+      loader.remove();
       scrollToBottom();
-    }
-    isSending = false;
-  });
+  }
+  isSending = false;
+});
+
+
 document
   .getElementById('chatInput')
   .addEventListener('keydown', async (event) => {

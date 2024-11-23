@@ -125,11 +125,46 @@ app.get('/logout', (req, res, next) => {
       });
   });
 });
+app.post('/api/imagine', async (req, res) => {
+  (async () => {
+    const { Client } = await import('@gradio/client');
+    const { prompt } = req.body; // Extract the prompt from the request body
+
+  try {
+    const client = await Client.connect("randomtable/Simple-FLUX-Image-Generator", {
+            headers: {
+                Authorization: `Bearer ${process.env.HUGGING_TOKEN}`,
+            }
+    });
+    const result = await client.predict("/infer", { 
+      prompt: prompt, 
+      seed: 0, 
+      randomize_seed: true, 
+      width: 1024, 
+      height: 1024, 
+      guidance_scale: 0, 
+      num_inference_steps: 8 
+    });
+
+    const imageUrl = result.data[0].url;
+    console.log(`------------------------------------------------------------\n`.green);
+    console.log(`${req.body.username}`.red +` Generated a Image: ${prompt}\n`.blue +`Ai response: ${imageUrl}\n`.cyan)
+    console.log(`------------------------------------------------------------`.green)
+    res.json({ url: imageUrl }); // Return the image URL as a JSON response
+
+  } catch (error) {
+    console.error('Error generating image:', error);
+    res.status(500).json({ error: 'Image generation failed' });
+  }
+  })();
+  
+  
+});
+
 var userName = '';
 app.post('/api/chat', async (req, res) => {
   const userMsg = req.body.message;
   userName = `${req.body.username}-${userID}`;
-  console.log(userName);
   // Initialize conversation history for the user if it doesn't exist
   if (!conversationHistory[userName]) {
     conversationHistory[userName] = [];
