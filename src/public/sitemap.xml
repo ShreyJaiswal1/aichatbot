@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< Updated upstream
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
 <url>
   <loc>https://honey.lazyshrey.xyz/</loc>
-  <lastmod>2024-11-20T13:07:46+00:00</lastmod>
-</url>
-
-
-</urlset>
-=======
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://honey.lazyshrey.xyz/</loc>
@@ -30,4 +16,3 @@
     <priority>0.8</priority>
   </url>
 </urlset>
->>>>>>> Stashed changes

@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-const webUrl = 'http://localhost:3000';
-const socket = io(webUrl, {
-=======
 const socket = io({
->>>>>>> Stashed changes
   reconnection: true, // whether to reconnect automatically
   reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
   reconnectionDelay: 1000, // how long to initially wait before attempting a new reconnection
@@ -14,21 +9,11 @@ let username = null;
 // Fetch username when page loads
 window.addEventListener('load', async () => {
   try {
-<<<<<<< Updated upstream
-    const response = await fetch(`${webUrl}/user`);
-=======
     const response = await fetch('/user');
->>>>>>> Stashed changes
     const data = await response.json();
     if (data.name) {
       username = data.name;
       socket.emit('user-joined', username);
-<<<<<<< Updated upstream
-      // Add welcome message
-      const welcomeMsg = document.createElement('div');
-      welcomeMsg.classList.add('bot-message');
-      welcomeMsg.innerHTML = `<p>Welcome ${username}! kese ho aaj tum?</p>`;
-=======
       
       // Update user profile in sidebar
       document.getElementById('userName').textContent = data.name;
@@ -54,7 +39,6 @@ window.addEventListener('load', async () => {
         </div>
         <span class="timestamp">${timestamp}</span>
       `;
->>>>>>> Stashed changes
       document.getElementById('chatMessages').appendChild(welcomeMsg);
     }
   } catch (error) {
@@ -64,15 +48,6 @@ window.addEventListener('load', async () => {
 });
 
 // dynamically change the input area
-<<<<<<< Updated upstream
-document
-  .getElementById('chatInput')
-  .addEventListener('input', async function () {
-    this.style.height = 'auto';
-    const maxHeight = 100;
-    this.style.height = Math.min(this.scrollHeight, maxHeight) + 'px';
-  });
-=======
 const chatInput = document.getElementById('chatInput');
 const autoResize = () => {
   chatInput.style.height = 'auto';
@@ -81,82 +56,11 @@ const autoResize = () => {
 };
 
 chatInput.addEventListener('input', autoResize);
->>>>>>> Stashed changes
 
 let isSending = false;
 
 // fetch the response from the server
 document.getElementById('sendButton').addEventListener('click', async function () {
-<<<<<<< Updated upstream
-  const chatInput = document.getElementById('chatInput');
-  chatInput.style.height = 'auto';
-  if (isSending) return; // If already sending, prevent further clicks
-
-  isSending = true;
-
-  // Get the value of the chatbox input
-  const message = chatInput.value;
-  if (message.trim() !== '') {
-      const chatElement = document.createElement('div');
-      chatElement.classList.add('message');
-      chatElement.innerHTML = `<p>${message}</p>`;
-      document.getElementById('chatMessages').appendChild(chatElement);
-      chatInput.value = '';
-      scrollToBottom();
-
-      // Loading the chat
-      const chatMessage = document.createElement('div');
-      chatMessage.classList.add('bot-message');
-      document.getElementById('chatMessages').appendChild(chatMessage);
-      const loader = document.createElement('div');
-      // Check if the message starts with /imagine
-      if (message.startsWith('/imagine')) {
-        loader.classList.add('typing');
-        loader.textContent = 'Generating Image...';
-        chatMessage.appendChild(loader);
-          const prompt = message.substring(9).trim(); // Get the prompt without the prefix
-          const response = await fetch(`${webUrl}/api/imagine`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ prompt: prompt, username: username }),
-          });
-
-          if (!response.ok) {
-              chatMessage.innerHTML = `<p>Cannot Fetch image</p>`;
-              throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          const data = await response.json();
-          const imageUrl = data.url; // Assuming the response contains the image URL in 'url'
-          chatMessage.innerHTML = `<img src="${imageUrl}" alt="Generated Image" style="max-width: 40%; min-width: 200px; height: auto; border-radius: 5px;">`;
-          scrollToBottom();
-      } else {
-        loader.classList.add('typing');
-        loader.textContent = 'Typing...';
-        chatMessage.appendChild(loader);
-          // Fetching regular chat response
-          const response = await fetch(`${webUrl}/api/chat`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ message: message, username: username }),
-          });
-
-          if (!response.ok) {
-              chatMessage.innerHTML = `<p>Cannot Fetch message</p>`;
-              throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          const data = await response.json();
-          chatMessage.innerHTML = `<p>${data.reply}</p>`;
-      }
-
-      loader.remove();
-      scrollToBottom();
-  }
-  isSending = false;
-});
-
-=======
   if (isSending) return; // If already sending, prevent further clicks
 
   isSending = true;
@@ -387,7 +291,6 @@ socket.on('message', async (data) => {
     // Handle other message types...
   }
 });
->>>>>>> Stashed changes
 
 document
   .getElementById('chatInput')
@@ -412,22 +315,6 @@ function closeNav() {
   document.body.style.backgroundColor = 'white';
 }
 
-<<<<<<< Updated upstream
-// toggle the dark and light mode when the user clicks the button
-const toggleButton = document.getElementById('check-5');
-const themeStylesheet = document.getElementById('theme-stylesheet');
-
-toggleButton.addEventListener('click', () => {
-  // Check current theme
-  if (themeStylesheet.getAttribute('href') === 'light.css') {
-    // Switch to dark mode
-    themeStylesheet.setAttribute('href', 'dark.css');
-  } else {
-    // Switch to light mode
-    themeStylesheet.setAttribute('href', 'light.css');
-  }
-});
-=======
 // Close sidenav when clicking outside
 document.addEventListener('click', function(event) {
   const sidenav = document.getElementById('mySidenav');
@@ -457,17 +344,12 @@ themeToggle.addEventListener('change', function() {
   localStorage.setItem('theme', theme);
 });
 
->>>>>>> Stashed changes
 document.addEventListener('DOMContentLoaded', () => {
   const logoutButton = document.getElementById('logOutBttn');
   if (logoutButton) {
       logoutButton.addEventListener('click', async () => {
           try {
-<<<<<<< Updated upstream
-              const response = await fetch(`${webUrl}/logout`);
-=======
               const response = await fetch('/logout');
->>>>>>> Stashed changes
               if (response.ok) {
                   window.location.href = '/';
               } else {
@@ -479,8 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 });
-<<<<<<< Updated upstream
-=======
 
 // Add copy to clipboard function
 async function copyToClipboard(button) {
@@ -501,4 +381,3 @@ async function copyToClipboard(button) {
     console.error('Failed to copy text:', err);
   }
 }
->>>>>>> Stashed changes
