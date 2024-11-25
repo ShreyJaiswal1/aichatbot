@@ -95,6 +95,8 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/login', (req, res) => {
   if (req.isAuthenticated()) {
     res.redirect('/chat');
@@ -111,7 +113,6 @@ app.get('/chat', (req, res) => {
   }
 });
 
-app.use(express.static(__dirname + '/public'));
 app.get(
   '/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
@@ -244,6 +245,16 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log(`${usr} disconnected`.magenta);
   });
+});
+
+// Error handling middleware
+app.use((req, res, next) => {
+  res.status(404).sendFile(__dirname + '/public/error.html');
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).sendFile(__dirname + '/public/error.html');
 });
 
 server.listen(port, () => {

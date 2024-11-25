@@ -328,20 +328,30 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// Theme switching functionality
-const themeToggle = document.getElementById('themeToggle');
-const themeStylesheet = document.getElementById('theme-stylesheet');
-
-// Check for saved theme preference
-const savedTheme = localStorage.getItem('theme') || 'light';
-themeToggle.checked = savedTheme === 'dark';
-themeStylesheet.href = `./css/${savedTheme}.css`;
-
-// Handle theme toggle
-themeToggle.addEventListener('change', function() {
-  const theme = this.checked ? 'dark' : 'light';
+// Theme handling
+function toggleTheme() {
+  const themeToggle = document.getElementById('themeToggle');
+  const themeStylesheet = document.getElementById('theme-stylesheet');
+  const theme = themeToggle.checked ? 'dark' : 'light';
+  
+  // Update stylesheet href
   themeStylesheet.href = `./css/${theme}.css`;
+  
+  // Save theme preference
   localStorage.setItem('theme', theme);
+}
+
+// Set initial theme based on user preference
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.getElementById('themeToggle');
+  const themeStylesheet = document.getElementById('theme-stylesheet');
+  
+  // Check for saved theme preference
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  
+  // Set initial state
+  themeToggle.checked = savedTheme === 'dark';
+  themeStylesheet.href = `./css/${savedTheme}.css`;
 });
 
 document.addEventListener('DOMContentLoaded', () => {
