@@ -1,10 +1,13 @@
-# Honey AI - Your Hinglish Speaking Companion
+# Honey AI - Your Hinglish Speaking Companion 
 
 A modern, interactive AI chatbot that communicates naturally in Hinglish (Hindi + English), making conversations more engaging and relatable for Indian users. Powered by Groq's LLaMA 3 model, Honey AI takes on the persona of a friendly 19-year-old Delhi college student who loves to chat about tech, college life, and everything in between!
 
 [![Join Discord](https://img.shields.io/discord/951909987838468116?color=%237289DA&label=Join%20Discord&logo=discord&logoColor=white)](https://discord.gg/BCKjPjhBrm)
 [![GitHub](https://img.shields.io/github/followers/ShreyJaiswal1?style=social)](https://github.com/ShreyJaiswal1)
-[![Support via UPI](https://img.shields.io/badge/Support%20via-UPI-green?logo=google-pay&logoColor=white)](upi://pay?pa=5aprilshrey@okhdfcbank&pn=Shrey%20Jaiswal&cu=INR)
+
+### Support me
+If you like my work, consider supporting me by buying me a coffee or two. Your support will help me to make things interesting and fun
+> UPI id: 5aprilshrey@okhdfcbank
 
 ## ✨ Features
 
@@ -19,7 +22,7 @@ A modern, interactive AI chatbot that communicates naturally in Hinglish (Hindi 
 
 ## 🚀 Live Demo
 
-Visit [Live Demo URL] to try out Honey AI!
+Visit [Honey Lazyshrey](https://honey.lazyshrey.xyz/) to try out Honey AI!
 
 ## 🛠️ Tech Stack
 
@@ -111,9 +114,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   - Discord: [Join our community](https://discord.gg/BCKjPjhBrm)
 
 ## 📸 Screenshots
-<center>
-<img src="https://cdn.discordapp.com/attachments/955580696779452436/1310636902067605546/image.png?ex=6745f13b&is=67449fbb&hm=fdf1e021be9a48a5b8f9e6bf38e75124bd375e645bf1b8b34db8420d3341c264&" alt="Honey AI" width="60%">
-</center>
+
+<img src="https://cdn.discordapp.com/attachments/955580696779452436/1310636902067605546/image.png?ex=6745f13b&is=67449fbb&hm=fdf1e021be9a48a5b8f9e6bf38e75124bd375e645bf1b8b34db8420d3341c264&" alt="Honey AI" width="60%" style="margin-left: 25%">
 
 ## 🔜 Upcoming Features
 
@@ -124,4 +126,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Integration with more AI models
 
 ---
-Made with ❤️ by Shrey Jaiswal
+<p style="text-align: center">Made with ❤️ by Shrey Jaiswal</p>
