@@ -106,7 +106,7 @@ Example replies:
       const data = await response.json();
       const groqResponse = data.choices[0].message.content
       console.log(`-----------------------------------------------\n`.green);
-      console.log(`User Message: ${userMessage}\nAI Response: ${groqResponse}\n`.cyan)
+      console.log(`${userName}: ${userMessage}\nAI Response: ${groqResponse}\n`.cyan)
       console.log(`-----------------------------------------------`.green)
       return groqResponse;
     } catch (error) {
