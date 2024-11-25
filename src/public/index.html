@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<<<<<<< Updated upstream
 
     <meta property="og:url" content="https://honey.lazyshrey.xyz" />
     <meta charset="UTF-8" />
@@ -83,5 +84,518 @@
     </div>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="script.js"></script>
+=======
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Experience natural conversations with Honey AI - Your intelligent Hinglish-speaking companion. Engage in seamless chats that combine Hindi and English naturally." />
+    <meta name="keywords" content="Honey AI, AI Chatbot, Hinglish chatbot, AI companion, conversational AI, lazyshrey honey, honey.lazyshrey.xyz, Hindi English chatbot" />
+    <meta name="author" content="Shrey Jaiswal" />
+    <meta name="robots" content="index, follow" />
+    <meta name="canonical" content="https://honey.lazyshrey.xyz/" />
+    <link rel="icon" type="image/png" href="./assets/honeylogo.png" />
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Honey AI - Your Intelligent Hinglish Chatbot Companion" />
+    <meta property="og:description" content="Meet Honey AI, your friendly Hinglish-speaking chatbot and perfect companion! Enjoy seamless, fun, and engaging conversations that brighten your day and make every chat memorable." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/honeylogo.png" />
+    <meta property="og:site_name" content="Honey AI" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://honey.lazyshrey.xyz/" />
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Honey AI - Your Intelligent Hinglish Chatbot Companion" />
+    <meta name="twitter:description" content="Experience natural conversations with Honey AI - Your intelligent Hinglish-speaking companion. Chat naturally in Hindi and English!" />
+    <meta name="twitter:image" content="./assets/honeylogo.png" />
+
+    <title>Honey AI - Your Intelligent Hinglish Chatbot Companion | honey.lazyshrey.xyz</title>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Honey AI Chatbot",
+      "url": "https://honey.lazyshrey.xyz",
+      "description": "An intelligent Hinglish-speaking AI chatbot that provides natural conversations combining Hindi and English.",
+      "applicationCategory": "ChatBot",
+      "operatingSystem": "Web Browser",
+      "author": {
+        "@type": "Person",
+        "name": "Shrey Jaiswal"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary-color: #8d8ed6;
+        --secondary-color: #d1abdf;
+        --text-color: #2c3e50;
+        --bg-color: #f5f7fb;
+        --card-bg: #ffffff;
+        --card-shadow: rgba(0, 0, 0, 0.1);
+        --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+        --gradient-start: #f6f9fc;
+        --gradient-end: #eef1f6;
+      }
+
+      [data-theme="dark"] {
+        --primary-color: #7071ab;
+        --secondary-color: #a083ab;
+        --text-color: #e4e4e4;
+        --bg-color: #1a1a1a;
+        --card-bg: #2d2d2d;
+        --card-shadow: rgba(0, 0, 0, 0.3);
+        --gradient-start: #1a1b2e;
+        --gradient-end: #252638;
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .hero {
+        background: linear-gradient(-45deg, 
+          var(--gradient-start),
+          var(--primary-color),
+          var(--secondary-color),
+          var(--gradient-end));
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s ease infinite;
+        color: white;
+        text-align: center;
+        padding: 6rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        animation: fadeInUp 1s ease-out;
+        margin-bottom: 1.5rem;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+      }
+
+      .hero p {
+        animation: fadeInUp 1s ease-out 0.2s backwards;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        opacity: 0.9;
+      }
+
+      .cta-button {
+        animation: scaleIn 0.5s ease-out 0.4s backwards;
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .cta-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .cta-button:active {
+        transform: translateY(0);
+      }
+
+      .feature-card {
+        animation: fadeInUp 0.5s ease-out backwards;
+      }
+
+      .feature-grid .feature-card:nth-child(1) { animation-delay: 0.1s; }
+      .feature-grid .feature-card:nth-child(2) { animation-delay: 0.2s; }
+      .feature-grid .feature-card:nth-child(3) { animation-delay: 0.3s; }
+      .feature-grid .feature-card:nth-child(4) { animation-delay: 0.4s; }
+      .feature-grid .feature-card:nth-child(5) { animation-delay: 0.5s; }
+      .feature-grid .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+      .about {
+        animation: fadeInUp 0.5s ease-out 0.2s backwards;
+      }
+
+      .features {
+        padding: 4rem 2rem;
+        text-align: center;
+        background: var(--bg-color);
+      }
+
+      .features h2 {
+        color: var(--text-color);
+        margin-bottom: 3rem;
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s var(--transition-timing) 0.6s forwards;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .feature-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 1rem;
+        transition: all 0.3s var(--transition-timing);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s var(--transition-timing) 0.8s forwards;
+        box-shadow: 0 4px 6px var(--card-shadow);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px var(--card-shadow);
+      }
+
+      .feature-card i {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        transition: transform 0.3s var(--transition-timing);
+      }
+
+      .feature-card:hover i {
+        transform: scale(1.1);
+      }
+
+      .feature-card h3 {
+        margin: 1rem 0;
+        color: var(--text-color);
+        font-size: 1.25rem;
+      }
+
+      .feature-card p {
+        color: var(--text-color);
+        opacity: 0.8;
+        line-height: 1.6;
+      }
+
+      footer {
+        background: transparent;
+        color: var(--text-color);
+        text-align: center;
+        padding: 2rem;
+        margin-top: auto;
+        border-top: 1px solid rgba(0,0,0,0.1);
+      }
+
+      footer a {
+        color: var(--text-color);
+        text-decoration: none;
+        margin: 0 1rem;
+        opacity: 0.7;
+        transition: opacity 0.3s var(--transition-timing);
+      }
+
+      footer a:hover {
+        opacity: 1;
+      }
+
+      footer p {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        opacity: 0.6;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--card-bg);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px var(--card-shadow);
+        z-index: 1000;
+        color: var(--text-color);
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1);
+      }
+
+      .about {
+        padding: 4rem 2rem;
+        text-align: center;
+        background: var(--bg-color);
+      }
+
+      .about h2 {
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+      }
+
+      .about p {
+        color: var(--text-color);
+        opacity: 0.8;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .logo-container {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+      }
+
+      .logo-container:hover {
+        transform: scale(1.05);
+      }
+
+      .logo {
+        width: 120px;
+        height: 40px;
+      }
+
+      .light-logo {
+        display: block;
+      }
+
+      .dark-logo {
+        display: none;
+      }
+
+      [data-theme="dark"] .light-logo {
+        display: none;
+      }
+
+      [data-theme="dark"] .dark-logo {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          padding: 4rem 1rem;
+        }
+
+        .features {
+          padding: 4rem 1rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          padding: 0 1rem;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+
+        .feature-card {
+          background: rgba(255, 255, 255, 0.95);
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-5px);
+        }
+
+        .feature-card i {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+          color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+          font-size: 1.3rem;
+          margin-bottom: 0.8rem;
+          color: var(--text-color);
+        }
+
+        .feature-card p {
+          font-size: 0.95rem;
+          line-height: 1.5;
+          color: var(--text-color);
+          opacity: 0.8;
+        }
+
+        footer {
+          padding: 1.5rem;
+        }
+
+        .logo-container {
+          position: absolute;
+          top: 15px;
+          left: 15px;
+        }
+      }
+    </style>
+    <script>
+      function toggleTheme() {
+        const body = document.documentElement;
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon();
+      }
+
+      function updateThemeIcon() {
+        const themeIcon = document.getElementById('theme-icon');
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        themeIcon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      }
+
+      // Set initial theme based on user preference
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="logo-container">
+      <img src="assets/logo.svg" alt="Honey AI" class="logo light-logo">
+      <img src="assets/dark-logo.svg" alt="Honey AI" class="logo dark-logo">
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <i id="theme-icon" class="fas fa-moon"></i>
+    </button>
+    <div class="hero">
+      <h1>Welcome to Honey AI</h1>
+      <p>Your intelligent Hinglish-speaking companion that makes conversations natural and engaging. Experience the perfect blend of Hindi and English chat.</p>
+      <a href="/login" class="cta-button">Start Chatting Now</a>
+    </div>
+
+    <section class="about">
+      <div class="container">
+        <h2>Meet Your AI Companion</h2>
+        <p>Honey AI is more than just a chatbot - it's your intelligent companion that understands and speaks in Hinglish, making conversations feel natural and relatable. Whether you want to have a casual chat, get creative with AI image generation, or seek assistance with tasks, Honey AI is here to help with its advanced natural language processing capabilities.</p>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Why Choose Honey AI?</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <i class="fas fa-comments"></i>
+          <h3>Natural Conversations</h3>
+          <p>Chat seamlessly in Hinglish, just like you would with a friend.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-brain"></i>
+          <h3>Intelligent Responses</h3>
+          <p>Powered by advanced AI to understand context and provide meaningful replies.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-lock"></i>
+          <h3>Secure & Private</h3>
+          <p>Your conversations are protected with state-of-the-art security.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-clock"></i>
+          <h3>24/7 Available</h3>
+          <p>Always ready to chat whenever you need a companion.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-image"></i>
+          <h3>Image Generation</h3>
+          <p>Create stunning images from text descriptions using advanced AI technology.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-code"></i>
+          <h3>Open Source</h3>
+          <p>All libraries and code are open source, promoting transparency and community collaboration.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <a href="https://5aprilshrey.gitbook.io/honey-ai-chatbot" aria-label="About Honey AI">About</a>
+      <a href="https://github.com/ShreyJaiswal1" aria-label="GitHub Profile">GitHub</a>
+      <a href="https://discord.gg/BCKjPjhBrm" aria-label="Discord Profile">Discord</a>
+      <p>&copy; 2024 Honey AI</p>
+    </footer>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+>>>>>>> Stashed changes
   </body>
 </html>

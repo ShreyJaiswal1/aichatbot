@@ -1,0 +1,472 @@
+:root {
+    /* Light theme variables */
+    --primary-color: #8d8ed6;
+    --primary-color-rgb: 141, 142, 214;
+    --secondary-color: #d1abdf;
+    --secondary-color-rgb: 209, 171, 223;
+    --background-color: #f5f7fb;
+    --text-color: #2c3e50;
+    --border-color: #e1e8ed;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-bg: #ffffff;
+    --card-bg-rgb: 255, 255, 255;
+    --gradient-start: #f6f9fc;
+    --gradient-end: #eef1f6;
+}
+
+[data-theme="dark"] {
+    --primary-color: #8d8ed6;
+    --primary-color-rgb: 141, 142, 214;
+    --secondary-color: #d1abdf;
+    --secondary-color-rgb: 209, 171, 223;
+    --background-color: #1a1b2e;
+    --text-color: #e4e4e7;
+    --border-color: #2a2b3d;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+    --card-bg: #252638;
+    --card-bg-rgb: 37, 38, 56;
+    --gradient-start: #1a1b2e;
+    --gradient-end: #252638;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(-45deg, 
+        var(--gradient-start),
+        var(--primary-color),
+        var(--secondary-color),
+        var(--gradient-end));
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes floatingBubbles {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(10px, -10px) scale(1.05);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+.background-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: floatingBubbles 8s ease-in-out infinite;
+}
+
+.bubble:nth-child(1) {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 25%;
+    animation-delay: -2s;
+}
+
+.bubble:nth-child(3) {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 30%;
+    animation-delay: -4s;
+}
+
+.bubble:nth-child(4) {
+    width: 120px;
+    height: 120px;
+    top: 30%;
+    right: 30%;
+    animation-delay: -6s;
+}
+
+.login-container {
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    background: rgba(var(--card-bg-rgb), 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 420px;
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    text-align: center;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(var(--card-bg-rgb), 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    background: rgba(var(--card-bg-rgb), 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+    transform: rotate(45deg);
+}
+
+.logo {
+    width: 120px;
+    height: 40px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Logo theme toggling */
+.light-logo {
+    display: block;
+}
+
+.dark-logo {
+    display: none;
+}
+
+[data-theme="dark"] .light-logo {
+    display: none;
+}
+
+[data-theme="dark"] .dark-logo {
+    display: block;
+}
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+h1 {
+    color: var(--text-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease forwards 0.4s;
+}
+
+p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease forwards 0.5s;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:hover::before {
+    opacity: 1;
+}
+
+.login-button:active {
+    transform: translateY(1px);
+}
+
+.login-button svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    fill: white;
+}
+
+.login-button:hover svg {
+    transform: rotate(10deg);
+}
+
+.login-button span {
+    font-weight: 500;
+}
+
+.login-button .spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.login-button.loading .spinner {
+    display: inline-block;
+}
+
+.login-button.loading span {
+    opacity: 0;
+}
+
+.status-message {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0;
+    height: 0;
+    transition: all 0.3s ease;
+}
+
+.status-message.error {
+    color: #ff4444;
+}
+
+.status-message.success {
+    color: #00C851;
+}
+
+.status-message.visible {
+    opacity: 1;
+    height: auto;
+    margin: 1rem 0;
+}
+
+.description-section {
+    margin-bottom: 2rem;
+    text-align: center;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.description-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.features-list {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    background: rgba(var(--card-bg-rgb), 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+    background: rgba(var(--card-bg-rgb), 0.8);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated-fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.animated-fade-in:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.animated-fade-in:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .login-button {
+        padding: 0.8rem 1.5rem;
+    }
+}

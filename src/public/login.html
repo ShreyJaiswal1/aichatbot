@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<<<<<<< Updated upstream
 <meta property="og:url" content="https://honey.lazyshrey.xyz" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -142,6 +143,141 @@
     </div>
 
     <script>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="noindex, follow" />
+    <meta name="googlebot" content="noindex, follow" />
+    <meta name="description" content="Secure login page for Honey AI - Your intelligent Hinglish-speaking chatbot companion. Access your personalized chat experience securely." />
+    <meta name="keywords" content="Honey AI login, AI Chatbot login, secure login, Hinglish chatbot access, honey.lazyshrey.xyz login" />
+    <meta name="author" content="Shrey Jaiswal" />
+    <link rel="icon" type="image/png" href="./assets/honeylogo.png" />
+    <meta name="canonical" content="https://honey.lazyshrey.xyz/login" />
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Login - Honey AI Chatbot | honey.lazyshrey.xyz" />
+    <meta property="og:description" content="Access your Honey AI chatbot account securely. Login to start your personalized Hinglish chat experience." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/honeylogo.png" />
+    <meta property="og:site_name" content="Honey AI" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://honey.lazyshrey.xyz/" />
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Login - Honey AI Chatbot | honey.lazyshrey.xyz" />
+    <meta name="twitter:description" content="Access your Honey AI chatbot account securely. Login to start your personalized Hinglish chat experience." />
+    <meta name="twitter:image" content="./assets/honeylogo.png" />
+
+    <title>Login - Honey AI Chatbot | honey.lazyshrey.xyz</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Honey AI Chatbot Login",
+      "description": "Secure login page for accessing your Honey AI chatbot account",
+      "url": "https://honey.lazyshrey.xyz/login",
+      "isAccessibleForFree": true,
+      "provider": {
+        "@type": "Organization",
+        "name": "Honey AI",
+        "url": "https://honey.lazyshrey.xyz"
+      }
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+    <div class="login-container">
+        <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+
+        <div class="logo-container">
+            <img src="assets/logo.svg" alt="Honey AI" class="logo light-logo">
+            <img src="assets/dark-logo.svg" alt="Honey AI" class="logo dark-logo">
+        </div>
+
+        <div class="description-section">
+            <h1 class="description-title animated-fade-in">Meet Honey AI</h1>
+            <p class="description-text animated-fade-in">Your friendly AI companion that speaks Hinglish! Experience natural conversations with a unique blend of Hindi and English.</p>
+            <div class="features-list">
+                <span class="feature-item animated-fade-in">🗣️ Hinglish Chat</span>
+                <span class="feature-item animated-fade-in">🤖 Smart AI</span>
+                <span class="feature-item animated-fade-in">🎯 Personalized</span>
+            </div>
+        </div>
+
+        <div class="login-options">
+            <!-- <h1>Welcome to Honey AI</h1>
+            <p>Your Hinglish-speaking AI companion awaits!</p>
+             -->
+            <button onclick="handleLogin()" class="login-button" id="loginButton">
+                <div class="spinner"></div>
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z"/>
+                </svg>
+                <span>Continue with Google</span>
+            </button>
+            
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+    </div>
+
+    <script>
+        // Theme handling
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme); 
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+        }
+
+        // Login handling
+        async function handleLogin() {
+            const button = document.getElementById('loginButton');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            try {
+                button.disabled = true;
+                button.classList.add('loading');
+                statusMessage.className = 'status-message';
+                
+                await startLogin();
+                
+                statusMessage.textContent = 'Login successful! Redirecting...';
+                statusMessage.classList.add('success', 'visible');
+            } catch (error) {
+                statusMessage.textContent = 'Failed to login. Please try again.';
+                statusMessage.classList.add('error', 'visible');
+            } finally {
+                button.disabled = false;
+                button.classList.remove('loading');
+            }
+        }
+
+>>>>>>> Stashed changes
         function startLogin() {
             window.location.href = '/auth/google';
         }
