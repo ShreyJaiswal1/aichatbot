@@ -132,6 +132,30 @@
       </div>
     </section>
 
+    <section class="screenshots">
+      <h2>See Honey AI in Action</h2>
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-slide">
+            <img src="./assets/gifs/darkmode.gif" alt="Honey AI Chat Interface - Dark Theme" loading="lazy">
+          </div>
+          <div class="carousel-slide">
+            <img src="./assets/gifs/codegen.gif" alt="Honey AI Code Generation" loading="lazy">
+          </div>
+          <div class="carousel-slide">
+            <img src="./assets/gifs/imagegen.gif" alt="AI Image Generation Feature" loading="lazy">
+          </div>
+        </div>
+        <button class="carousel-btn prev" aria-label="Previous slide">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn next" aria-label="Next slide">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="carousel-dots"></div>
+      </div>
+    </section>
+
     <footer>
       <a href="https://5aprilshrey.gitbook.io/honey-ai-chatbot" aria-label="About Honey AI">About</a>
       <a href="https://discord.gg/BCKjPjhBrm" aria-label="Discord Profile">Discord</a>
@@ -139,5 +163,80 @@
     </footer>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script>
+      // Carousel functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.querySelector('.carousel');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+        const dotsContainer = document.querySelector('.carousel-dots');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // Create dots
+        slides.forEach((_, index) => {
+          const dot = document.createElement('div');
+          dot.classList.add('dot');
+          if (index === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => goToSlide(index));
+          dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateDots() {
+          dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+          });
+        }
+
+        function goToSlide(n) {
+          currentSlide = n;
+          carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+          updateDots();
+        }
+
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % totalSlides;
+          goToSlide(currentSlide);
+        }
+
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+          goToSlide(currentSlide);
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Auto-advance slides
+        let slideInterval = setInterval(nextSlide, 12000);
+
+        // Pause auto-advance on hover
+        carousel.addEventListener('mouseenter', () => {
+          clearInterval(slideInterval);
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+          slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carousel.addEventListener('touchstart', e => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carousel.addEventListener('touchend', e => {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchEndX < touchStartX) nextSlide();
+          if (touchEndX > touchStartX) prevSlide();
+        });
+      });
+    </script>
   </body>
 </html>

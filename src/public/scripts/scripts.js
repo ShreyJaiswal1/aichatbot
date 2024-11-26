@@ -128,7 +128,6 @@ document.getElementById('sendButton').addEventListener('click', async function (
               img.alt = data.title || 'Generated Image';
               img.className = 'generated-image';
               imgContainer.appendChild(img);
-              scrollToBottom();
               if (data.title) {
                 const titleDiv = document.createElement('div');
                 titleDiv.className = 'image-title';
@@ -154,7 +153,6 @@ document.getElementById('sendButton').addEventListener('click', async function (
           } else {
             loader.innerHTML = '<span style="color: #5e5e5e; font-style: italic; opacity: 0.8">Typing...</span>';
               chatMessage.appendChild(loader);
-              scrollToBottom();
               // Fetching regular chat response
               const response = await fetch('/api/chat', {
                   method: 'POST',
@@ -186,6 +184,7 @@ document.getElementById('sendButton').addEventListener('click', async function (
         } finally {
             if (loader.parentNode) {
                 loader.remove();
+                scrollToBottom();
             }
         }
     }
@@ -229,11 +228,26 @@ async function downloadImage(imageUrl, title) {
 
 // Format the message text with code blocks and basic markdown
 function formatMessage(text) {
-  // Replace code blocks (```code```)
-  text = text.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+  // Replace code blocks with language support (```language\ncode```)
+  text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+    const language = lang || 'plaintext';
+    const highlightedCode = Prism.highlight(
+      code.trim(),
+      Prism.languages[language] || Prism.languages.plaintext,
+      language
+    );
+    return `<pre class="line-numbers"><code class="language-${language}">${highlightedCode}</code></pre>`;
+  });
   
   // Replace inline code (`code`)
-  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  text = text.replace(/`([^`]+)`/g, (match, code) => {
+    const highlightedCode = Prism.highlight(
+      code,
+      Prism.languages.plaintext,
+      'plaintext'
+    );
+    return `<code class="language-plaintext">${highlightedCode}</code>`;
+  });
   
   // Replace bold (**text**)
   text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');

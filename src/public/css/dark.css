@@ -481,7 +481,7 @@ body::after {
 
 /* Code formatting */
 .message-content pre {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -490,6 +490,7 @@ body::after {
   max-width: 100%;
   white-space: pre-wrap;
   word-wrap: break-word;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .message-content pre code {
@@ -499,16 +500,20 @@ body::after {
   color: inherit;
   white-space: pre-wrap;
   word-wrap: break-word;
+  text-shadow: none;
 }
 
 .message-content code {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: 'Consolas', monospace;
   font-size: 0.9em;
   white-space: pre-wrap;
   word-wrap: break-word;
+  color: var(--text-color);
+  text-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .message-content p {
@@ -538,6 +543,72 @@ body::after {
   text-decoration: underline;
 }
 
+/* Prism.js line numbers */
+.line-numbers .line-numbers-rows {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1em 0;
+}
+
+.line-numbers-rows > span:before {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Token colors for dark theme */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999;
+}
+
+.token.punctuation {
+  color: #ccc;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f08d8d;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #7ec699;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #ccc;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #7eb6f6;
+}
+
+.token.function,
+.token.class-name {
+  color: #f08d8d;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #ffd700;
+}
+
 /* Input Area */
 .input-area {
   margin-top: 1rem;
@@ -548,6 +619,10 @@ body::after {
   border-radius: 1rem;
   box-shadow: 0 2px 10px var(--shadow-color);
   border: 1px solid var(--border-color);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  margin-bottom: 0;
 }
 
 textarea {

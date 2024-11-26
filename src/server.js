@@ -60,8 +60,8 @@ app.use('/api', ensureAuthenticated);
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.OAUTH_ID,
-      clientSecret: process.env.OAUTH_SECRET,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${domain}/auth/google/callback`,
       proxy: true,
     },
@@ -125,7 +125,6 @@ app.get(
   }
 );
 
-var userID = null;
 // Add user route to get user information
 app.get('/user', (req, res) => {
   if (req.isAuthenticated()) {
@@ -160,30 +159,28 @@ app.post('/api/imagine', async (req, res) => {
     try {
       const prompt = req.body.prompt;
       const imageTitle = await generateImageTitle(prompt);
-      const { Client } = await import('@gradio/client');
-      const client = await Client.connect("randomtable/Simple-FLUX-Image-Generator", {
-        headers: {
-          Authorization: `Bearer ${process.env.HUGGING_TOKEN}`,
-        }
-      });
-      const result = await client.predict("/infer", { 
-        prompt: prompt, 
-        seed: 0, 
-        randomize_seed: true, 
-        width: 1024, 
-        height: 1024, 
-        guidance_scale: 0, 
-        num_inference_steps: 8 
+      
+      // Generate random seed between 1 and 1000000
+      const seed = Math.floor(Math.random() * 1000000) + 1;
+      
+      // Pollinations.ai API endpoint with seed
+      const pollinationsResponse = await fetch('https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) + '?seed=' + seed, {
+        method: 'GET'
       });
 
-      const imageUrl = result.data[0].url;
+      if (!pollinationsResponse.ok) {
+        throw new Error('Failed to generate image from Pollinations.ai');
+      }
+
+      const imageUrl = pollinationsResponse.url;
       console.log(`------------------------------------------------------------\n`.green);
       console.log(`${req.body.username}`.red +` Generated a Image: ${prompt}\n`.blue +`Ai response: ${imageUrl}\n`.cyan)
       console.log(`------------------------------------------------------------`.green)
       
       res.json({ 
         url: imageUrl,
-        title: imageTitle 
+        title: imageTitle,
+        seed: seed // Including seed in response for reference
       });
 
     } catch (error) {
@@ -193,10 +190,9 @@ app.post('/api/imagine', async (req, res) => {
   })();
 });
 
-var userName = '';
 app.post('/api/chat', async (req, res) => {
   const userMsg = req.body.message;
-  userName = `${req.body.username}-${userID}`;
+  const userName = `${req.body.username}-${req.body.id}`;
   // Initialize conversation history for the user if it doesn't exist
   if (!conversationHistory[userName]) {
     conversationHistory[userName] = [];
