@@ -111,7 +111,7 @@ async function generateImageTitle(prompt) {
         Authorization: `Bearer ${apiToken}`,
       },
       body: JSON.stringify({
-        model: 'llama-3.2-90b-text-preview',
+        model: 'llama-3.1-8b-instant',
         messages: [
           {
             role: 'system',

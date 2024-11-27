@@ -748,9 +748,14 @@ textarea::placeholder {
 /* Responsive Design */
 @media (max-width: 768px) {
   .chat-container {
-    margin: 4rem 0 0;
-    height: calc(100vh - 4rem);
-    padding: 0.5rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin-bottom: 70px;
+    position: relative;
+    z-index: 1;
   }
 
   .message {
@@ -763,7 +768,7 @@ textarea::placeholder {
     margin: 0.5rem;
     padding: 0.75rem;
     border-radius: 0.75rem;
-    position: sticky;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
@@ -774,8 +779,14 @@ textarea::placeholder {
   }
 
   .chat-messages {
-    padding: 0.5rem;
-    margin-top: 1rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin-bottom: 70px; /* Extra space for input area */
+    position: relative;
+    z-index: 1;
   }
 
   textarea {
