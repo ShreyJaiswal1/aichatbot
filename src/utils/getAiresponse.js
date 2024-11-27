@@ -1,6 +1,7 @@
 require('dotenv').config();
 const colors = require('colors');
 const apiToken = process.env.GROQ_API_TOKEN;
+const model = 'llama-3.1-70b-versatile';
 
 async function getAIResponse(userMessage, userName, chatHistory) {
   try {
@@ -11,7 +12,7 @@ async function getAIResponse(userMessage, userName, chatHistory) {
           Authorization: `Bearer ${apiToken}`,
         },
         body: JSON.stringify({
-          model: 'llama-3.1-70b-versatile',
+          model: model,
           messages: [
             {
               role: 'system',
@@ -111,7 +112,7 @@ async function generateImageTitle(prompt) {
         Authorization: `Bearer ${apiToken}`,
       },
       body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
+        model: model,
         messages: [
           {
             role: 'system',

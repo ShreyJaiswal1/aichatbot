@@ -319,6 +319,32 @@ async function scrollToBottom() {
   const content = document.getElementById('chatMessages');
   content.scrollTop = content.scrollHeight;
 }
+
+// Create modal element
+const imageModal = document.createElement('div');
+imageModal.className = 'image-modal';
+const modalImage = document.createElement('img');
+modalImage.className = 'modal-content';
+imageModal.appendChild(modalImage);
+document.body.appendChild(imageModal);
+
+// Function to handle image click
+function handleImageClick(event) {
+  if (event.target.classList.contains('generated-image')) {
+    modalImage.src = event.target.src;
+    imageModal.classList.add('active');
+  }
+}
+
+// Function to close modal
+function closeModal() {
+  imageModal.classList.remove('active');
+}
+
+// Add click event listeners
+document.addEventListener('click', handleImageClick);
+imageModal.addEventListener('click', closeModal);
+
 function openNav() {
   document.getElementById('mySidenav').style.width = '300px';
   document.body.style.backgroundColor = 'rgba(0,0,0,0.4)';
