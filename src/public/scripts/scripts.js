@@ -73,7 +73,7 @@ document.getElementById('sendButton').addEventListener('click', async function (
         const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         chatElement.innerHTML = `
           <div class="message-content">
-            <p>${message}</p>
+            <p>${escapeHTML(message)}</p>
           </div>
           <span class="timestamp">
             <button class="copy-btn" onclick="copyToClipboard(this)" title="Copy message">
@@ -411,6 +411,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 });
+// Excape Html
+function escapeHTML(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
 
 // Add copy to clipboard function
 async function copyToClipboard(button) {
