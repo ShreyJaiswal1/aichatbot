@@ -7,7 +7,7 @@ A modern, interactive AI chatbot that communicates naturally in Hinglish (Hindi 
 
 ### Support me
 If you like my work, consider supporting me by buying me a coffee or two. Your support will help me to make things interesting and fun
-> UPI id: 5aprilshrey@okhdfcbank
+> ```UPI id: 5aprilshrey@okhdfcbank```
 
 ## ✨ Features
 
