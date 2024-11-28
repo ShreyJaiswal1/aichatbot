@@ -28,6 +28,7 @@ Visit [Honey Lazyshrey](https://honey.lazyshrey.xyz/) to try out Honey AI!
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Node.js, Express.js
+- **Image-generation**: Pollinations.ai
 - **Real-time Communication**: Socket.IO
 - **Authentication**: Google OAuth 2.0
 - **AI Model**: Groq API (LLaMA 3)
@@ -115,7 +116,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📸 Screenshots
 
+<p align="center">
 <img src="https://cdn.discordapp.com/attachments/955580696779452436/1310636902067605546/image.png?ex=6745f13b&is=67449fbb&hm=fdf1e021be9a48a5b8f9e6bf38e75124bd375e645bf1b8b34db8420d3341c264&" alt="Honey AI" width="60%" style="margin-left: 25%">
+</p>
 
 ## 🔜 Upcoming Features
 
@@ -126,4 +129,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Integration with more AI models
 
 ---
-<p style="text-align: center">Made with ❤️ by Shrey Jaiswal</p>
+<p align="center">Made with ❤️ by Shrey Jaiswal</p>
