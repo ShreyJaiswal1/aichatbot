@@ -1,7 +1,52 @@
-User-agent: *
-Allow: /
-Sitemap: https://honey.lazyshrey.xyz/sitemap.xml
+# honey.lazyshrey.xyz robots.txt
+# Updated 2024
 
-# Disallow sensitive directories
+# Allow all crawlers
+User-agent: *
+# Allow crawling of all public content
+Allow: /
+Allow: /index.html
+Allow: /login.html
+Allow: /error.html
+Allow: /assets/
+Allow: /css/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+
+# Protect private areas
 Disallow: /admin/
 Disallow: /private/
+Disallow: /chat    # Protected chat interface
+Disallow: /*?*     # Block URLs with query parameters
+Disallow: /*?
+Disallow: /api/    # Protect API endpoints
+
+# Crawl-delay for all bots
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Block specific bots known for aggressive crawling
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemap declaration
+Sitemap: https://honey.lazyshrey.xyz/sitemap.xml

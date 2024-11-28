@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://honey.lazyshrey.xyz/</loc>
     <lastmod>2024-01-17</lastmod>
-    <changefreq>always</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://honey.lazyshrey.xyz/assets/honeylogo.png</image:loc>
+      <image:title>Honey AI Logo</image:title>
+      <image:caption>Honey AI - Your Intelligent Hinglish Chatbot Companion</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://honey.lazyshrey.xyz/login</loc>
     <lastmod>2024-01-17</lastmod>
-    <changefreq>always</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Chat page is listed but marked with lower priority since it requires authentication -->
   <url>
-    <loc>https://honey.lazyshrey.xyz/chat</loc>
+    <loc>https://honey.lazyshrey.xyz/error</loc>
     <lastmod>2024-01-17</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>
