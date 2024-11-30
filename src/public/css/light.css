@@ -845,9 +845,9 @@ textarea::placeholder {
   }
 
   .send-button, .mic-button {
-    width: 36px;
-    height: 36px;
-    margin-left: 0.5rem;
+    width: 42px;
+    height: 42px;
+    margin-left: 0.1rem;
   }
 
   .send-button, .mic-button i {
