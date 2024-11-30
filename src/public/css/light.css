@@ -683,7 +683,7 @@ textarea::placeholder {
 .mic-button {
   background: rgba(141, 142, 214, 0.1);
   border: 1px solid rgba(141, 142, 214, 0.2);
-  color: var(--text-color);
+  color: var(--primary-color);
   width: 45px;
   height: 45px;
   border-radius: 12px;
