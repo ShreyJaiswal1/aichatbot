@@ -68,11 +68,7 @@ Example replies:
               content: `user message: ${userMessage} username: ${userName}`,
             },
           ],
-          temperature: 0.35,
-          max_tokens: 500,
-          top_p: 0.7,
-          frequency_penalty: 0.7,
-          presence_penalty: 0.7
+          max_tokens: 500
         }),
       });
       const data = await response.json();
