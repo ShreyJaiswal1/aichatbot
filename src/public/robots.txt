@@ -1,13 +1,11 @@
 # honey.lazyshrey.xyz robots.txt
-# Updated 2024
+# Optimized for instant crawling - 2024
 
-# Allow all crawlers
+# General settings for all bots
 User-agent: *
-# Allow crawling of all public content
-Allow: /
+Allow: /        # Allow crawling of all public content
 Allow: /index.html
 Allow: /login.html
-Allow: /error.html
 Allow: /assets/
 Allow: /css/
 Allow: /*.css$
@@ -17,18 +15,14 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /*.gif$
 
-# Protect private areas
+# Block sensitive or private areas
 Disallow: /admin/
 Disallow: /private/
 Disallow: /chat    # Protected chat interface
-Disallow: /*?*     # Block URLs with query parameters
-Disallow: /*?
 Disallow: /api/    # Protect API endpoints
+Disallow: /*?      # Block URLs with query parameters
 
-# Crawl-delay for all bots
-Crawl-delay: 1
-
-# Specific rules for major search engines
+# Specific search engine settings
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
@@ -41,7 +35,7 @@ User-agent: DuckDuckBot
 Allow: /
 Crawl-delay: 1
 
-# Block specific bots known for aggressive crawling
+# Block known aggressive crawlers
 User-agent: AhrefsBot
 Disallow: /
 
