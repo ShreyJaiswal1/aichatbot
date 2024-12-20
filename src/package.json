@@ -20,9 +20,9 @@
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.1",
     "express-session": "^1.18.1",
+    "firebase": "^11.1.0",
     "http": "^0.0.1-security",
     "mongodb": "^6.11.0",
-    "mongoose": "^8.8.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "socket.io": "^4.8.1"

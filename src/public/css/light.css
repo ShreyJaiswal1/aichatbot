@@ -86,6 +86,19 @@ body::after {
   border-bottom: 1px solid rgba(141, 142, 214, 0.1);
 }
 
+.divider {
+  text-align: center;
+  color: rgb(110, 109, 109);
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin: 0 auto;
+  margin-bottom: 0.3rem;
+  padding: 0 0.5rem;
+  border-radius: 0.2rem;
+  background-color: #dedede;
+  max-width: fit-content;
+}
+
 .menu-btn {
   background: none;
   border: none;
@@ -190,6 +203,7 @@ body::after {
   color: var(--text-color);
   white-space: nowrap;
   overflow: hidden;
+  max-width: 8rem;
   text-overflow: ellipsis;
 }
 
@@ -199,6 +213,7 @@ body::after {
   opacity: 0.7;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 8rem;
   text-overflow: ellipsis;
 }
 
@@ -230,7 +245,7 @@ body::after {
 
 /* Close Button */
 .close-btn {
-  position: relative;
+  position: relative; 
   background: none;
   border: none;
   color: var(--text-color);

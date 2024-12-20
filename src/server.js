@@ -1,11 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-// const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 const http = require('http');
 const socketIo = require('socket.io');
-const { getAIResponse, generateImageTitle } = require('./utils/getAiresponse.js');
+const {
+  getAIResponse,
+  generateImageTitle,
+} = require('./utils/getAiresponse.js');
+const { initializeApp } = require('firebase/app');
+const {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+} = require('firebase/firestore');
 const app = express();
 const server = http.createServer(app);
 const colors = require('colors');
@@ -20,9 +31,13 @@ const io = socketIo(server, {
     methods: ['GET', 'POST'],
   },
 });
-
+const firebaseConfig = require('./utils/firebaseConfig.js');
 const domain = process.env.DOMAIN;
 const port = process.env.PORT;
+
+// Initialize Firebase
+const appFirebase = initializeApp(firebaseConfig);
+const db = getFirestore(appFirebase);
 
 // Session configuration
 app.use(
@@ -44,17 +59,20 @@ const ensureAuthenticated = (req, res, next) => {
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors({
-  origin: domain,
-  methods: ['GET', 'POST'],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: domain,
+    methods: ['GET', 'POST'],
+    credentials: true,
+    optionsSuccessStatus: 200,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 app.use(bodyParser.json());
 
 // Protect all API routes with authentication
 app.use('/api', ensureAuthenticated);
+app.use('/user', ensureAuthenticated);
 
 // Passport configuration
 passport.use(
@@ -79,20 +97,9 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-// // Rate limiting: 5 requests per minute per IP for chat API
-// const apiLimiter = rateLimit({
-//   windowMs: 1 * 60 * 1000, // 1 minute window
-//   max: 10, // limit each IP to 5 requests per window
-//   message: "Too many requests from this IP, please try again later.",
-// });
-
-// app.use('/api/chat', apiLimiter); // Apply rate limit to /api/chat endpoint
-
-const conversationHistory = {};
-
 // Handle API requests
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/html/index.html');
 });
 
 app.use(express.static(__dirname + '/public'));
@@ -101,13 +108,13 @@ app.get('/login', (req, res) => {
   if (req.isAuthenticated()) {
     res.redirect('/chat');
   } else {
-    res.sendFile(__dirname + '/public/login.html');
+    res.sendFile(__dirname + '/public/html/login.html');
   }
 });
 
 app.get('/chat', (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendFile(__dirname + '/public/chat.html');
+    res.sendFile(__dirname + '/public/html/chat.html');
   } else {
     res.redirect('/login');
   }
@@ -117,6 +124,7 @@ app.get(
   '/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
+    
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
@@ -124,9 +132,10 @@ app.get(
     res.redirect('/chat');
   }
 );
-
+let userName = null;
 // Add user route to get user information
 app.get('/user', (req, res) => {
+  userName = `${req.user.displayName}-${req.user.id}`;
   if (req.isAuthenticated()) {
     const user = {
       name: req.user.displayName,
@@ -141,97 +150,112 @@ app.get('/user', (req, res) => {
 
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.session.destroy((err) => {
       if (err) {
-          return next(err);
+        console.error('Session destruction error:', err);
+        return res.status(500).send('Logout failed');
       }
-      req.session.destroy((err) => {
-          if (err) {
-              console.error('Session destruction error:', err);
-              return res.status(500).send('Logout failed');
-          }
-          res.redirect('/');
-      });
+      res.redirect('/');
+    });
   });
 });
 
 app.post('/api/imagine', async (req, res) => {
-  (async () => {
-    try {
-      const prompt = req.body.prompt;
-      const imageTitle = await generateImageTitle(prompt);
-      
-      // Generate random seed between 1 and 1000000
-      const seed = Math.floor(Math.random() * 1000000) + 1;
-      
-      // Pollinations.ai API endpoint with seed
-      const pollinationsResponse = await fetch('https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) + '?seed=' + seed, {
-        method: 'GET'
-      });
+  try {
+    const prompt = req.body.prompt;
+    const imageTitle = await generateImageTitle(prompt);
 
-      if (!pollinationsResponse.ok) {
-        throw new Error('Failed to generate image from Pollinations.ai');
+    // Generate random seed between 1 and 1000000
+    const seed = Math.floor(Math.random() * 1000000) + 1;
+
+    // Pollinations.ai API endpoint with seed
+    const pollinationsResponse = await fetch(
+      'https://image.pollinations.ai/prompt/' +
+        encodeURIComponent(prompt) +
+        '?seed=' +
+        seed,
+      {
+        method: 'GET',
       }
+    );
 
-      const imageUrl = pollinationsResponse.url;
-      console.log(`------------------------------------------------------------\n`.green);
-      console.log(`${req.body.username}`.red +` Generated a Image: ${prompt}\n`.blue +`Ai response: ${imageUrl}\n`.cyan)
-      console.log(`------------------------------------------------------------`.green)
-      
-      res.json({ 
-        url: imageUrl,
-        title: imageTitle,
-        seed: seed // Including seed in response for reference
-      });
-
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'Failed to generate image' });
+    if (!pollinationsResponse.ok) {
+      throw new Error('Failed to generate image from Pollinations.ai');
     }
-  })();
+
+    const imageUrl = pollinationsResponse.url;
+    console.log(
+      `------------------------------------------------------------\n`.green
+    );
+    console.log(
+      `${req.body.username}`.red +
+        ` Generated a Image: ${prompt}\n`.blue +
+        `Ai response: ${imageUrl}\n`.cyan
+    );
+    console.log(
+      `------------------------------------------------------------`.green
+    );
+    // Save chat history to Firestore
+    await addDoc(collection(db, 'chatHistory'), {
+      userName,
+      prompt,
+      imageTitle,
+      imageUrl,
+      timestamp: new Date(),
+    });
+
+    res.json({
+      url: imageUrl,
+      title: imageTitle,
+      seed: seed, // Including seed in response for reference
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to generate image' });
+  }
 });
 
 app.post('/api/chat', async (req, res) => {
   const userMsg = req.body.message;
-  const userName = `${req.body.username}-${req.body.id}`;
-  // Initialize conversation history for the user if it doesn't exist
-  if (!conversationHistory[userName]) {
-    conversationHistory[userName] = [];
-  }
-
-  // Add user message to conversation history
-  conversationHistory[userName].push({ role: 'user', content: userMsg });
-
   try {
-    const botResponse = await getAIResponse(
-      userMsg,
-      req.body.username,
-        conversationHistory[userName]
-    );
+    const botResponse = await getAIResponse(userMsg, req.body.username, req.user.id);
 
-    // Add bot response to conversation history
-    conversationHistory[userName].push({
-      role: 'assistant',
-      content: botResponse,
+    // Save chat history to Firestore
+    await addDoc(collection(db, 'chatHistory'), {
+      userName,
+      userMsg,
+      botResponse,
+      timestamp: new Date(),
     });
 
-    // Limit conversation history to last 10 messages (adjust as needed)
-    if (conversationHistory[userName].length > 20) {
-      conversationHistory[userName] = conversationHistory[userName].slice(-20);
-    }
-
-    // console.log(conversationHistory[userName]);
     res.json({ reply: botResponse });
   } catch (error) {
-    console.error('Error in AI response:', error);
+    console.error('Error in AI response:'.red);
     res
       .status(500)
       .json({ error: 'Something went wrong with the AI response' });
   }
 });
 
+app.get('/api/chatHistory', async (req, res) => {
+  const q = query(collection(db, 'chatHistory'), orderBy('timestamp', 'asc'));
+  try {
+    const querySnapshot = await getDocs(q);
+    const chatHistory = querySnapshot.docs
+      .map((doc) => doc.data())
+      .filter((chat) => chat.userName === userName);
+    res.json(chatHistory);
+  } catch (error) {
+    console.error('Error fetching chat history:', error);
+    res.status(500).json({ error: 'Failed to fetch chat history' });
+  }
+});
+
 io.on('connection', (socket) => {
-  // console.log('New client connected'.yellow);
-  var usr= null;
+  var usr = null;
   socket.once('user-joined', (username) => {
     usr = username;
     console.log(`${username} joined the chat`.blue);
@@ -245,12 +269,12 @@ io.on('connection', (socket) => {
 
 // Error handling middleware
 app.use((req, res, next) => {
-  res.status(404).sendFile(__dirname + '/public/error.html');
+  res.status(404).sendFile(__dirname + '/public/html/error.html');
 });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).sendFile(__dirname + '/public/error.html');
+  res.status(500).sendFile(__dirname + '/public/html/error.html');
 });
 
 server.listen(port, () => {

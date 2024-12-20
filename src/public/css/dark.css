@@ -6,7 +6,7 @@
   --border-color: #2a2b3d;
   --shadow-color: rgba(0, 0, 0, 0.25);
   --chat-bubble-user: #8d8ed6;
-  --chat-bubble-bot: #2a2b3d;
+  --chat-bubble-bot: #3a3c52;
   --font-family: 'Poppins', sans-serif;
 }
 
@@ -82,6 +82,19 @@ body::after {
   align-items: center;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
   border-bottom: 1px solid rgba(141, 142, 214, 0.1);
+}
+
+.divider {
+  text-align: center;
+  color: rgb(185, 184, 184);
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin: 0 auto;
+  margin-bottom: 0.3rem;
+  padding: 0 0.5rem;
+  border-radius: 0.2rem;
+  background-color: #414141;
+  max-width: fit-content;
 }
 
 .menu-btn {
@@ -188,6 +201,7 @@ body::after {
   color: var(--text-color);
   white-space: nowrap;
   overflow: hidden;
+  max-width: 8rem;
   text-overflow: ellipsis;
 }
 
@@ -197,6 +211,7 @@ body::after {
   opacity: 0.7;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 8rem;
   text-overflow: ellipsis;
 }
 
