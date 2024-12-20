@@ -786,7 +786,7 @@ textarea::placeholder {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+  background: #c7c1e3;
   border-radius: 3px;
 }
 
