@@ -129,10 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeStylesheet = document.getElementById('theme-stylesheet');
   
   // Check for saved theme preference
-  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const savedTheme = localStorage.getItem('theme') || 'light';
   
   // Set initial state
-  themeToggle.unchecked = savedTheme === 'light';
+  themeToggle.checked = savedTheme === 'dark';
   themeStylesheet.href = `./css/${savedTheme}.css`;
 });
 

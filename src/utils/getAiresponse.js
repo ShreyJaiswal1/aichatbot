@@ -83,14 +83,14 @@ Example replies:
 const addHistory = chatHistory.flatMap((chat) => [
   {
     role: 'user',
-    content: chat.userMsg,
+    content: chat.userMsg || `Requested image of ${chat.prompt}`,
   },
   {
     role: 'assistant',
-    content: chat.botResponse,
+    content: chat.botResponse || `Generated image of ${chat.prompt} and honey titled it as ${chat.imageTitle}`,
   },
 ]);
-    
+   console.log(addHistory);
     // Prepare messages for the API request
     const messages = [
       systemPrompt,
