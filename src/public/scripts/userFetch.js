@@ -7,13 +7,12 @@ window.addEventListener('load', async () => {
       socket.emit('user-joined', username);
 
       // Fetch and display chat history
-      const chatHistoryResponse = await fetch(`/api/chatHistory?username=${username}&id=${data.id}`);
+      const chatHistoryResponse = await fetch(`/api/chatHistory`);
       const chatHistory = await chatHistoryResponse.json();
         chatHistory.forEach(chat => {
           
         const timestamp = new Date(chat.timestamp.seconds * 1000);
         const formattedTimestamp = `${String(timestamp.getDate()).padStart(2, '0')}/${String(timestamp.getMonth() + 1).padStart(2, '0')}/${String(timestamp.getFullYear()).slice(-2)} - ${String(timestamp.getHours()).padStart(2, '0')}:${String(timestamp.getMinutes()).padStart(2, '0')}`;
-
 
         // Append user message
         const userMessageElement = document.createElement('div');

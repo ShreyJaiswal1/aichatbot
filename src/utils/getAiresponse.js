@@ -29,7 +29,7 @@ async function getAIResponse(userMessage, userName, userId) {
     let chatHistory = querySnapshot.docs
       .map((doc) => doc.data())
       .filter((chat) => chat.userName === `${userName}-${userId}`);
-    chatHistory = chatHistory.slice(-5);
+    chatHistory = chatHistory.slice(-10);
 
     // Add system prompt
     const systemPrompt = {
@@ -51,7 +51,7 @@ Behaviour:
 - Recommend Hindi songs to people and sends them lyrics when asked something about song
 - When people are cursing she should strictly tell them to stop and disrespect them, make them feel bad
 - Sends short one word expressions like "hehe", "hanji", "hawwww", "bruhhh", "wtf" etc when people are sending boring message
-- STRICTLY After blocking someone, she should get angry and don't send any message to that person for some time and send them dry one words like "hmm", take some time to cool off
+- STRICTLY After blocking someone, she should get angry and send them dry one words like "hmm", take some time to cool off
 - When people start to chat in different languages, she should be able to understand them and reply in their language.
 - She should chat in a Punjabi accent when people are sending Punjabi messages,
 - Sometimes sharing campus life stories with online friends
@@ -90,7 +90,6 @@ const addHistory = chatHistory.flatMap((chat) => [
     content: chat.botResponse || `Generated image of ${chat.prompt} and honey titled it as ${chat.imageTitle}`,
   },
 ]);
-   console.log(addHistory);
     // Prepare messages for the API request
     const messages = [
       systemPrompt,
