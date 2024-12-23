@@ -15,6 +15,7 @@ const {
   addDoc,
   getDocs,
   query,
+  where,
   orderBy,
 } = require('firebase/firestore');
 const app = express();
@@ -132,10 +133,8 @@ app.get(
     res.redirect('/chat');
   }
 );
-let userName = null;
 // Add user route to get user information
 app.get('/user', (req, res) => {
-  userName = `${req.user.displayName}-${req.user.id}`;
   if (req.isAuthenticated()) {
     const user = {
       name: req.user.displayName,
@@ -165,6 +164,8 @@ app.get('/logout', (req, res, next) => {
 
 app.post('/api/imagine', async (req, res) => {
   try {
+    const userName = req.body.username;
+    const userId = req.user.id;
     const prompt = req.body.prompt;
     const imageTitle = await generateImageTitle(prompt);
 
@@ -202,6 +203,7 @@ app.post('/api/imagine', async (req, res) => {
     await addDoc(collection(db, 'chatHistory'), {
       userName,
       prompt,
+      userId,
       imageTitle,
       imageUrl,
       timestamp: new Date(),
@@ -220,20 +222,23 @@ app.post('/api/imagine', async (req, res) => {
 
 app.post('/api/chat', async (req, res) => {
   const userMsg = req.body.message;
+  const userName = req.body.username;
+  const userId = req.user.id;
   try {
-    const botResponse = await getAIResponse(userMsg, req.body.username, req.user.id);
+    const botResponse = await getAIResponse(userMsg, userName, userId);
 
     // Save chat history to Firestore
     await addDoc(collection(db, 'chatHistory'), {
       userName,
       userMsg,
+      userId,
       botResponse,
       timestamp: new Date(),
     });
 
     res.json({ reply: botResponse });
   } catch (error) {
-    console.error('Error in AI response:'.red);
+    console.error('Error in AI response:', error);
     res
       .status(500)
       .json({ error: 'Something went wrong with the AI response' });
@@ -241,12 +246,15 @@ app.post('/api/chat', async (req, res) => {
 });
 
 app.get('/api/chatHistory', async (req, res) => {
-  const q = query(collection(db, 'chatHistory'), orderBy('timestamp', 'asc'));
+  const userId = req.user.id;
+  const q = query(
+    collection(db, 'chatHistory'),
+    where('userId', '==', userId),
+    orderBy('timestamp', 'asc')
+  );
   try {
     const querySnapshot = await getDocs(q);
-    const chatHistory = querySnapshot.docs
-      .map((doc) => doc.data())
-      .filter((chat) => chat.userName === userName);
+    const chatHistory = querySnapshot.docs.map((doc) => doc.data());
     res.json(chatHistory);
   } catch (error) {
     console.error('Error fetching chat history:', error);

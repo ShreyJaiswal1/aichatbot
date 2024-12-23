@@ -7,6 +7,7 @@ const {
   query,
   orderBy,
   limit,
+  where,
   getDocs,
 } = require('firebase/firestore');
 const firebaseConfig = require('./firebaseConfig.js');
@@ -23,12 +24,12 @@ async function getAIResponse(userMessage, userName, userId) {
 
     const q = query(
       collection(db, 'chatHistory'),
+      where('userId', '==', userId),
       orderBy('timestamp', "asc")
     );
     const querySnapshot = await getDocs(q);
     let chatHistory = querySnapshot.docs
-      .map((doc) => doc.data())
-      .filter((chat) => chat.userName === `${userName}-${userId}`);
+      .map((doc) => doc.data());
     chatHistory = chatHistory.slice(-10);
 
     // Add system prompt
@@ -124,7 +125,7 @@ const addHistory = chatHistory.flatMap((chat) => [
     console.log(`-----------------------------------------------`.green);
     return groqResponse;
   } catch (error) {
-    // throw error.message;
+     throw error.message;
   }
 }
 
