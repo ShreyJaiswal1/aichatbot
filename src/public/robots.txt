@@ -1,8 +1,4 @@
-# honey.lazyshrey.xyz robots.txt
-# Optimized for instant crawling - 2024
-
 User-agent: *
 Allow: /
-Disallow: /api
-Disallow: /error
+Disallow: /api/
 Sitemap: https://honey.lazyshrey.xyz/sitemap.xml

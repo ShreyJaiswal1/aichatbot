@@ -1,4 +1,3 @@
-// Format the message text with code blocks and basic markdown
 function formatMessage(text) {
   // Replace code blocks with language support (```language\ncode```)
   text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {

@@ -6,7 +6,7 @@ window.addEventListener('load', async () => {
       username = data.name;
       socket.emit('user-joined', username);
 
-      // Fetch and display chat history
+      //chat history
       const chatHistoryResponse = await fetch(`/api/chatHistory`);
       const chatHistory = await chatHistoryResponse.json();
         chatHistory.forEach(chat => {
@@ -48,7 +48,6 @@ window.addEventListener('load', async () => {
                 titleDiv.style.cursor = 'pointer';
                 titleDiv.title = 'Click to download image';
 
-                // Add click event listener
                 titleDiv.addEventListener('click', () => {
                   downloadImage(chat.imageUrl, chat.imageTitle);
                 });
@@ -83,7 +82,6 @@ window.addEventListener('load', async () => {
           
       });
 
-      // Update user profile in sidebar
       document.getElementById('userName').textContent = data.name;
       document.getElementById('userEmail').textContent = data.email || '';
 
@@ -101,7 +99,7 @@ window.addEventListener('load', async () => {
       divider.classList.add('divider');
       document.getElementById('chatMessages').appendChild(divider);
 
-      // Add welcome message
+      // welcome message
       const welcomeMsg = document.createElement('div');
       welcomeMsg.classList.add('message', 'bot');
       
@@ -117,7 +115,7 @@ window.addEventListener('load', async () => {
       scrollToBottom();
     }
   } catch (error) {
-    console.error('Error fetching user:', error);
+    console.log('Error fetching user:', error);
    // window.location.href = '/';
   }
 });

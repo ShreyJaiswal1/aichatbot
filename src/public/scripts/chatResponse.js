@@ -1,11 +1,11 @@
 // fetch the response from the server
 let isSending = false;
 document.getElementById('sendButton').addEventListener('click', async function () {
-  if (isSending) return; // If already sending, prevent further clicks
+  if (isSending) return; 
 
   isSending = true;
   try {
-    // Get the value of the chatbox input
+
     const message = chatInput.value;
     if (message.trim() !== '') {
         const chatElement = document.createElement('div');
@@ -24,7 +24,7 @@ document.getElementById('sendButton').addEventListener('click', async function (
         `;
         document.getElementById('chatMessages').appendChild(chatElement);
         chatInput.value = '';
-        chatInput.style.height = 'auto';  // Reset height after sending
+        chatInput.style.height = 'auto';
         scrollToBottom();
 
         // Loading the chat
@@ -36,7 +36,7 @@ document.getElementById('sendButton').addEventListener('click', async function (
         try {
           // Check if the message starts with /imagine
           if (message.startsWith('/imagine')) {
-              // Create and append skeleton loader
+              // skeleton loader
               const skeletonLoader = document.createElement('div');
               skeletonLoader.classList.add('skeleton-loader');
               chatMessage.appendChild(skeletonLoader);
@@ -44,7 +44,7 @@ document.getElementById('sendButton').addEventListener('click', async function (
               loader.innerHTML = '<span style="color: #5e5e5e; font-style: italic; opacity: 0.8">Generating Image...</span>';
             chatMessage.appendChild(loader);
             scrollToBottom();
-              const prompt = message.substring(9).trim(); // Get the prompt without the prefix
+              const prompt = message.substring(9).trim(); //remove /imagine command
               const response = await fetch('/api/imagine', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },

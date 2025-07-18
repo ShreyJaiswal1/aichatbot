@@ -1,7 +1,7 @@
 const socket = io({
-  reconnection: true, // whether to reconnect automatically
-  reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
-  reconnectionDelay: 1000, // how long to initially wait before attempting a new reconnection
+  reconnection: true, 
+  reconnectionAttempts: Infinity,
+  reconnectionDelay: 1000,
   reconnectionDelayMax: 5000,
 });
 let username = null;
@@ -15,8 +15,24 @@ const autoResize = () => {
 
 chatInput.addEventListener('input', autoResize);
 
-
-
+document.getElementById('clearChatBttn').addEventListener('click', async () => {
+  try {
+    const response = await fetch('/api/clearHistory', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.message);
+      window.location.reload();
+    }
+  } catch (error) {
+    console.error('Error clearing chat history:', error);
+    alert('Failed to clear chat history. Please try again.');
+  }
+});
 async function downloadImage(imageUrl, title) {
   try {
     // Fetch the image
@@ -123,7 +139,7 @@ function toggleTheme() {
   localStorage.setItem('theme', theme);
 }
 
-// Set initial theme based on user preference
+// Set initial theme
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('themeToggle');
   const themeStylesheet = document.getElementById('theme-stylesheet');

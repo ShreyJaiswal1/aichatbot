@@ -15,7 +15,9 @@ const {
   addDoc,
   getDocs,
   query,
+  doc,
   where,
+  writeBatch,
   orderBy,
 } = require('firebase/firestore');
 const app = express();
@@ -226,8 +228,6 @@ app.post('/api/chat', async (req, res) => {
   const userId = req.user.id;
   try {
     const botResponse = await getAIResponse(userMsg, userName, userId);
-
-    // Save chat history to Firestore
     await addDoc(collection(db, 'chatHistory'), {
       userName,
       userMsg,
@@ -247,12 +247,13 @@ app.post('/api/chat', async (req, res) => {
 
 app.get('/api/chatHistory', async (req, res) => {
   const userId = req.user.id;
+  try {
   const q = query(
     collection(db, 'chatHistory'),
     where('userId', '==', userId),
     orderBy('timestamp', 'asc')
   );
-  try {
+
     const querySnapshot = await getDocs(q);
     const chatHistory = querySnapshot.docs.map((doc) => doc.data());
     res.json(chatHistory);
@@ -261,6 +262,34 @@ app.get('/api/chatHistory', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch chat history' });
   }
 });
+
+app.delete('/api/clearHistory', async (req, res) => {
+  const userId = req.user.id;
+  try {
+    const chatHistoryRef = collection(db, 'chatHistory');
+    const q = query(chatHistoryRef, where('userId', '==', userId));
+    const querySnapshot = await getDocs(q)
+    if (querySnapshot.empty) {
+      return res.status(200).json({
+        message: 'No chat history found for the user.',
+      });
+    }
+
+    const batch = writeBatch(db);
+    let deletedCount = 0;
+    querySnapshot.forEach((document) => {
+      batch.delete(doc(db, 'chatHistory', document.id));
+      deletedCount++;
+    });
+    await batch.commit();
+
+    res.json({
+        message: `Successfully deleted ${deletedCount} chat entries.`,
+      });
+  } catch (error) {
+    console.error('Error deleting user entries:', error);
+  }
+})
 
 io.on('connection', (socket) => {
   var usr = null;
@@ -288,3 +317,4 @@ app.use((err, req, res, next) => {
 server.listen(port, () => {
   console.log(`Server started http://localhost:${port}/`);
 });
+
